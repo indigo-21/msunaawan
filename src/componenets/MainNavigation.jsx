@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Logo from "../assets/logo.png";
 import {
     Navbar,
     Collapse,
@@ -11,9 +12,15 @@ import {
     MenuList,
     MenuItem,
 } from "@material-tailwind/react";
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
+import { 
+    ChevronDownIcon, 
+    Bars3Icon,
+    XMarkIcon, 
+} from "@heroicons/react/24/outline";
 import { CursorArrowRaysIcon } from "@heroicons/react/24/solid";
+
 import MainNavigationDropdown from "./MainNavigationDropdown";
+import MainMobileNavigationDropdown from "./MainMobileNavigationDropdown";
 
 export default function MainNavigation() {
     const [openNav, setOpenNav] = useState(false);
@@ -33,94 +40,97 @@ export default function MainNavigation() {
             dropdownItems: [
                 { subPage: "VMGC & History", link: "/vmgc-history" },
                 { subPage: "Contacts", link: "/contacts" },
-                { subPage: "Annual Report", link: "/annual-report" }
+                { subPage: "Annual Report", link: "/annual-report" },
+            ],
+        },
+        {
+            page: "Organization",
+            dropdown: true,
+            dropdownItems: [
+                { subPage: "Office of the Chancellor", link: "/vmgc-history" },
+                { subPage: "Office of the Vice Chancellor for Academic Affairs", link: "/contacts" },
+                { subPage: "Office of the Vice Chancellor for Research & Extension", link: "/annual-report" },
+                { subPage: "Office of the Vice Chancellor for Administration & Finance", link: "/annual-report" },
+                { subPage: "Office of the Vice-Chancellor for Planning & Development", link: "/annual-report" },
+                { subPage: "Faculty and Staff", link: "/annual-report" },
             ],
         },
         { 
-            page: "Organization", 
+            page: "Academics", 
             dropdown: true,
             dropdownItems: [
-                { subPage: "VMGC & History", link: "/vmgc-history" },
-                { subPage: "Contacts", link: "/contacts" },
-                { subPage: "Annual Report", link: "/annual-report" }
+                { subPage: "University Admission", link: "/vmgc-history" },
+                { subPage: "Academic Calendar", link: "/contacts" },
+                { subPage: "Schools & Colleges", link: "/annual-report" },
+                { subPage: "Campus Library", link: "/annual-report" },
+            ],
+         },
+        { 
+            page: "Research", 
+            dropdown: true,
+            dropdownItems: [
+                { subPage: "Research Division", link: "/vmgc-history" },
+                { subPage: "Niche Center for Sea Cucumber", link: "/contacts" },
+                { subPage: "Journal of Environment & Aquatic Resources", link: "/annual-report" },
+                { subPage: "Intellectual Property Rights Office", link: "/annual-report" },
             ],
         },
-        { page: "Academics", dropdown: false },
-        { page: "Research", dropdown: false },
         { page: "Extension", dropdown: false },
         { page: "International", dropdown: false },
-        { page: "Services", dropdown: false },
-        { page: "Login", dropdown: false }
+        { 
+            page: "Services", 
+            dropdown: true,
+            dropdownItems: [
+                { subPage: "Application for University ID", link: "/vmgc-history" },
+                { subPage: "Request for Registrar Documents", link: "/contacts" },
+                { subPage: "Library OPAC", link: "/annual-report" },
+                { subPage: "ICTC Multimedia Services Reservation", link: "/annual-report" },
+                { subPage: "MSUN Vehicle Reservation", link: "/annual-report" },
+            ],
+        },
+        { 
+            page: "Login", 
+            dropdown: true,
+            dropdownItems: [
+                { subPage: "MySchool for Students", link: "/vmgc-history" },
+                { subPage: "MyWork for Employees", link: "/contacts" },
+                { subPage: "Student Admission", link: "/annual-report" },
+                { subPage: "Bids & Awards Committee", link: "/annual-report" },
+                { subPage: "Vendors & Suppliers", link: "/annual-report" },
+                { subPage: "Chancellor’s VirtualDesk", link: "/annual-report" },
+            ],
+        },
     ];
 
     return (
         <>
-            <Navbar className="sticky top-0 z-10 h-max max-w-full rounded-none px-4 py-2 lg:px-8 lg:py-4">
-                <div className="flex items-center justify-between text-blue-gray-900">
-                    {/* <Typography
-            as="a"
-            href="#"
-            className="mr-4 cursor-pointer py-1.5 font-medium"
-          >
-            Material Tailwind
-          </Typography> */}
-                    LOGO
+            <Navbar className="sticky top-0 z-10 h-max max-w-full rounded-none py-2 lg:py-4">
+                <div className="md:container md:mx-auto flex flex-wrap items-center justify-between text-blue-gray-900">
+                    <img src={Logo} className="nav-logo"/>
                     <div className="flex items-center gap-4">
                         <div className="mr-4 hidden lg:block">
                             <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
                                 {navLists.map((navList, index) => {
-                                    // console.log(navList.page)
-                                    if (navList.dropdown === true) {
-                                        console.log(navList.page + "test")
-                                        // const dropdownLists = navList.dropdownItems;
+                                    if (navList.dropdown) {
                                         return (
-                                            <li key={navList.page}>
-                                                {navList.dropdownItems !== "undefined" && <MainNavigationDropdown dropdownItems={navList.dropdownItems}/>}
-                                                {/* <Menu allowHover>
-                                                    <MenuHandler>
-                                                        <Typography
-                                                            variant="small"
-                                                            color="blue-gray"
-                                                            className="p-1 font-normal dropdown"
-                                                        >
-                                                            <span>
-                                                                {navList.title}{" "}
-                                                                <ChevronDownIcon
-                                                                    strokeWidth={2.5}
-                                                                    className={`h-3.5 w-3.5 transition-transform inline-flex chevron-down`}
-                                                                />
-                                                            </span>
-                                                        </Typography>
-                                                    </MenuHandler>
-                                                    <MenuList>
-                                                        {dropdownLists.map(
-                                                            (dropdownItem, index) => (
-                                                                <MenuItem key={index}>
-                                                                    {dropdownItem.title}
-                                                                </MenuItem>
-                                                            )
-                                                        )}
-                                                    </MenuList>
-                                                </Menu> */}
+                                            <li key={index}>
+                                                <MainNavigationDropdown
+                                                    dropdownItems={
+                                                        navList.dropdownItems
+                                                    }
+                                                    page={navList.page}
+                                                />
                                             </li>
                                         );
                                     } else {
-                                        console.log(navList.page)
                                         return (
                                             <li key={index}>
-                                            <Typography
-                                                variant="small"
-                                                color="blue-gray"
-                                                className="p-1 font-normal"
-                                                key={index}
-                                            >
-                                                <a
-                                                    href="#"
-                                                    className="flex items-center"
+                                                <Typography
+                                                    variant="small"
+                                                    className="p-1 font-bold text-primary"
                                                 >
-                                                    {navList.title}
-                                                </a>
-                                            </Typography>
+                                                    {navList.page}
+                                                </Typography>
                                             </li>
                                         );
                                     }
@@ -145,105 +155,47 @@ export default function MainNavigation() {
                         </div> */}
                         <IconButton
                             variant="text"
-                            className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
-                            ripple={false}
+                            color="blue-gray"
+                            className="lg:hidden"
                             onClick={() => setOpenNav(!openNav)}
                         >
                             {openNav ? (
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
+                                <XMarkIcon
                                     className="h-6 w-6"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
                                     strokeWidth={2}
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M6 18L18 6M6 6l12 12"
-                                    />
-                                </svg>
+                                />
                             ) : (
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
+                                <Bars3Icon
                                     className="h-6 w-6"
-                                    fill="none"
-                                    stroke="currentColor"
                                     strokeWidth={2}
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M4 6h16M4 12h16M4 18h16"
-                                    />
-                                </svg>
+                                />
                             )}
                         </IconButton>
                     </div>
                 </div>
-                {/* <Collapse open={openNav}>
-                    {navLists.map((navList) => {
+                <Collapse open={openNav}>
+                    {navLists.map((navList, index) => {
                         if (navList.dropdown === true) {
-                            const dropdownLists = navList.dropdownItems;
+                            const dropdownItems = navList.dropdownItems;
                             return (
-                                <li key={navList.title}>
-                                    <Typography
-                                        as="li"
-                                        variant="small"
-                                        color="blue-gray"
-                                        className="p-1 font-normal"
-                                        key={navList.title} 
-                                    >
-                                        <button onClick={() => setOpenMobileMenu(!openMobileMenu)}>
-                                            {navList.title}{" "}
-                                            <ChevronDownIcon
-                                                strokeWidth={2.5}
-                                                className={`h-3.5 w-3.5 transition-transform inline-flex ${
-                                                    openMobileMenu
-                                                        ? "rotate-180"
-                                                        : ""
-                                                }`}
-                                            />
-                                        </button>
-                                    </Typography>
-                                    <Collapse open={openMobileMenu}>
-                                        <ul>
-                                            {dropdownLists.map((dropdownItem) => (
-                                                <Typography
-                                                as="li"
-                                                variant="small"
-                                                color="blue-gray"
-                                                className="p-1 font-normal" key={dropdownItem.title}>
-                                                    {dropdownItem.title}
-                                                </Typography>
-                                            ))}
-                                        
-                                        </ul>
-                                    </Collapse>
+                                <li key={index}>
+                                    
+                                    <MainMobileNavigationDropdown page={navList.page} dropdownItems={dropdownItems}/>
                                 </li>
                             );
                         } else {
                             return (
-                                <li key={navList.title}>
-                                    <Typography
-                                        as="li"
-                                        variant="small"
-                                        color="blue-gray"
-                                        className="p-1 font-normal"
-                                    >
-                                        <a
-                                            href="#"
-                                            className="flex items-center"
-                                        >
-                                            {navList.title}
+                                <li key={index}>
+                                    <Typography variant="small" className="p-1 font-bold text-primary">
+                                        <a href="#" className="flex items-center">
+                                            {navList.page}
                                         </a>
                                     </Typography>
                                 </li>
                             );
                         }
                     })}
-                </Collapse> */}
+                </Collapse>
             </Navbar>
         </>
     );

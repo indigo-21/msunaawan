@@ -3,9 +3,9 @@ import MainNavigation from "../componenets/MainNavigation"
 export default function RootLayout () {
     return (
         <>
-        {/* <div className="container-lg"> */}
+            {/* <div className="md:container md:mx-auto"> */}
             <MainNavigation/>
-            <main>
+            <main className="md:container md:mx-auto">
                 <Outlet />
             </main>
             {/* </div> */}
