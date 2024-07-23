@@ -23,9 +23,9 @@ export default function MainMobileNavigationDropdown({
                 </button>
             </Typography>
             <Collapse open={openMobileMenu}>
-                <ul>
+                <ul className="ml-8">
                     {dropdownItems.map((dropdownItem, index) => (
-                        <li key={index}>
+                        <li key={index} className="my-4">
                             <Typography variant="small" className="p-1 font-bold text-primary">
                                 {dropdownItem.subPage}
                             </Typography>

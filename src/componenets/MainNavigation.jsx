@@ -105,11 +105,11 @@ export default function MainNavigation() {
     return (
         <>
             <Navbar className="sticky top-0 z-10 h-max max-w-full rounded-none py-2 lg:py-4">
-                <div className="md:container md:mx-auto flex flex-wrap items-center justify-between text-blue-gray-900">
+                <div className="container sm:container mx-auto flex flex-wrap items-center justify-between text-blue-gray-900">
                     <img src={Logo} className="nav-logo"/>
                     <div className="flex items-center gap-4">
                         <div className="mr-4 hidden lg:block">
-                            <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+                            <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-2">
                                 {navLists.map((navList, index) => {
                                     if (navList.dropdown) {
                                         return (
@@ -178,18 +178,18 @@ export default function MainNavigation() {
                         if (navList.dropdown === true) {
                             const dropdownItems = navList.dropdownItems;
                             return (
-                                <li key={index}>
+                                <li key={index} className="my-3">
                                     
                                     <MainMobileNavigationDropdown page={navList.page} dropdownItems={dropdownItems}/>
                                 </li>
                             );
                         } else {
                             return (
-                                <li key={index}>
+                                <li key={index} className="my-3">
                                     <Typography variant="small" className="p-1 font-bold text-primary">
-                                        <a href="#" className="flex items-center">
+                                        <button>
                                             {navList.page}
-                                        </a>
+                                        </button>
                                     </Typography>
                                 </li>
                             );
