@@ -8,7 +8,7 @@ const AppRoutes = [
         path: '/',
         element: <RootLayout />,
         children: [
-            {index: true, element: <MapCustom />},
+            {index: true, element: <Home />},
             // {index: true, element: <Home />},
             {path: '/map', element: <MapCustom />},
             {path: '/map2', element: <Home />},
