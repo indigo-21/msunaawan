@@ -1,7 +1,7 @@
 import RootLayout from "../layout/RootLayout";
-// import Home from "../pages/Home/Home";
+import Home from "../pages/Home/Home";
 import MapCustom from "../pages/Map/MapCustom";
-import MapCustom2 from "../pages/Map/MapCustom-backup-new";
+// import MapCustom2 from "../pages/Map/MapCustom-backup-new";
 
 const AppRoutes = [
     {
@@ -11,7 +11,7 @@ const AppRoutes = [
             {index: true, element: <MapCustom />},
             // {index: true, element: <Home />},
             {path: '/map', element: <MapCustom />},
-            {path: '/map2', element: <MapCustom2 />},
+            {path: '/map2', element: <Home />},
         ]
     }
 ];
