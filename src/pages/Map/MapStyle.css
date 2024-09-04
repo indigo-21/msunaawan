@@ -1,0 +1,7 @@
+.leaflet-container {
+    background-color: #fff;
+}
+
+.leaflet-popup-content {
+    width: 700px !important;
+}
