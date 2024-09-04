@@ -17,11 +17,17 @@ import {
     MapPinIcon,
 } from "@heroicons/react/16/solid";
 import { Button, Typography } from "@material-tailwind/react";
-import { LatLngBounds } from "leaflet";
+import { Icon, LatLngBounds } from "leaflet";
 import { MSU_COORDS, LOCATIONS } from "./MapCoords";
 import MapList from "./MapList";
+import marker from "../../assets/marker.png";
 import "./MapStyle.css";
 import "leaflet/dist/leaflet.css";
+
+const myIcon = new Icon({
+    iconUrl: marker,
+    iconSize: [42, 42],
+});
 
 export default function MapCustom() {
     const bounds = new LatLngBounds([8.4247, 124.28599], [8.43197, 124.29189]);
@@ -41,11 +47,10 @@ export default function MapCustom() {
 
     // console.log(location);
 
-
     const handleClick = (data) => {
         // const coordinates = [data[0], data[1]];
         // content = (<Marker position={[8.426505559037478,124.28742885589601]}/>);
-        setMapMarker([data[0],data[1]]);
+        setMapMarker([data[0], data[1]]);
     };
 
     // console.log(mapMarker);
@@ -96,7 +101,7 @@ export default function MapCustom() {
                                 <Tooltip direction="bottom" opacity={1}>
                                     {locations.title}
                                 </Tooltip>
-                                <Marker position={mapMarker}/>
+                                <Marker position={mapMarker}  icon={myIcon} />
                                 <Popup>
                                     <div className="grid grid-cols-2 gap-4">
                                         <section>
