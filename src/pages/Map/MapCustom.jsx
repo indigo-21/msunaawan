@@ -57,7 +57,7 @@ export default function MapCustom() {
 
     return (
         <div className="flex flex-row">
-            <section className="basis-1/5">
+            <section className="basis-1/5 bg-white">
                 <div className="container my-10">
                     <MapList onClickBuilding={handleClick}/>
                 </div>

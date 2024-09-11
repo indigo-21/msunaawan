@@ -62,7 +62,7 @@ export default function MapList({ onClickBuilding }) {
                     </button>
                 </div>
             </div>
-            <Card className="w-full">
+            <Card className="w-full bg-gray-100">
                 {locationList.length > 0 && (
                     <List >
                         {locationList.map((location, key) => {
