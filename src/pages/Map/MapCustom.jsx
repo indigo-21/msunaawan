@@ -59,7 +59,7 @@ export default function MapCustom() {
         <div className="flex flex-row">
             <section className="basis-1/5 bg-white">
                 <div className="container my-10">
-                    <MapList onClickBuilding={handleClick}/>
+                    <MapList onClickBuilding={handleClick} />
                 </div>
             </section>
             <section className=" basis-4/5">
@@ -101,7 +101,7 @@ export default function MapCustom() {
                                 <Tooltip direction="bottom" opacity={1}>
                                     {locations.title}
                                 </Tooltip>
-                                <Marker position={mapMarker}  icon={myIcon} />
+                                <Marker position={mapMarker} icon={myIcon} />
                                 <Popup>
                                     <div className="grid grid-cols-2 gap-4">
                                         <section>
@@ -161,51 +161,68 @@ export default function MapCustom() {
                                         </section>
 
                                         <section>
-                                            <section className="border-4 my-3">
-                                                <div className="flex">
-                                                    <Typography
-                                                        variant="h5"
-                                                        className="w-full mt-5 flex gap-2 px-3"
-                                                    >
-                                                        <CalendarDaysIcon className="w-6 h-6" />
-                                                        Event
-                                                    </Typography>
-                                                    <a
-                                                        href="https://indigo21uk.sharepoint.com/sites/MSU-test9/_layouts/15/Events.aspx?ListGuid=b2269384-ec7f-4959-be38-b06663a01115&AudienceTarget=false"
-                                                        target="_blank"
-                                                    >
-                                                        <ArrowTopRightOnSquareIcon className="h-5 w-5 m-2" />
-                                                    </a>
-                                                </div>
-                                                <div className="grid px-3">
-                                                    <Typography
-                                                        variant="h6"
-                                                        className="mt-1 mb-3"
-                                                    >
-                                                        LaughFest Carnival
-                                                    </Typography>
-                                                    <div className="flex gap-3">
+                                            {Object.keys(locations.event)
+                                                .length !== 0 && (
+                                                <section className="border-4 my-3">
+                                                    <div className="flex">
                                                         <Typography
-                                                            variant="small"
-                                                            className="!-mt-3 mb-3"
+                                                            variant="h5"
+                                                            className="w-full mt-5 flex gap-2 px-3"
                                                         >
-                                                            September 25, 2024
+                                                            <CalendarDaysIcon className="w-6 h-6" />
+                                                            Event
                                                         </Typography>
-                                                        <Typography
-                                                            variant="small"
-                                                            className="!-mt-3 mb-3"
+                                                        <a
+                                                            href={
+                                                                locations.event
+                                                                    .link
+                                                            }
+                                                            target="_blank"
                                                         >
-                                                            |
-                                                        </Typography>
-                                                        <Typography
-                                                            variant="small"
-                                                            className="!-mt-3 mb-3"
-                                                        >
-                                                            10:00 AM
-                                                        </Typography>
+                                                            <ArrowTopRightOnSquareIcon className="h-5 w-5 m-2" />
+                                                        </a>
                                                     </div>
-                                                </div>
-                                            </section>
+                                                    <div className="grid px-3">
+                                                        <Typography
+                                                            variant="h6"
+                                                            className="mt-1 mb-3"
+                                                        >
+                                                            {
+                                                                locations.event
+                                                                    .title
+                                                            }
+                                                        </Typography>
+                                                        <div className="flex gap-3">
+                                                            <Typography
+                                                                variant="small"
+                                                                className="!-mt-3 mb-3"
+                                                            >
+                                                                {
+                                                                    locations
+                                                                        .event
+                                                                        .date
+                                                                }
+                                                            </Typography>
+                                                            <Typography
+                                                                variant="small"
+                                                                className="!-mt-3 mb-3"
+                                                            >
+                                                                |
+                                                            </Typography>
+                                                            <Typography
+                                                                variant="small"
+                                                                className="!-mt-3 mb-3"
+                                                            >
+                                                                {
+                                                                    locations
+                                                                        .event
+                                                                        .time
+                                                                }
+                                                            </Typography>
+                                                        </div>
+                                                    </div>
+                                                </section>
+                                            )}
 
                                             <div className="border-4 my-3">
                                                 <div className="flex">
@@ -228,7 +245,11 @@ export default function MapCustom() {
                                                         variant="small"
                                                         className="!-mt-3 mb-3"
                                                     >
-                                                        +639656700743
+                                                        {
+                                                            locations
+                                                                .contactInformation
+                                                                .phone
+                                                        }
                                                     </Typography>
                                                 </div>
 
@@ -243,7 +264,11 @@ export default function MapCustom() {
                                                         variant="small"
                                                         className="!-mt-3 mb-3"
                                                     >
-                                                        extension.division@msunaawan.edu.ph
+                                                        {
+                                                            locations
+                                                                .contactInformation
+                                                                .email
+                                                        }
                                                     </Typography>
                                                 </div>
                                             </div>
@@ -263,7 +288,7 @@ export default function MapCustom() {
                                                         variant="h6"
                                                         className="mt-1 mb-3"
                                                     >
-                                                        No Changes
+                                                        {locations.status}
                                                     </Typography>
                                                 </div>
                                             </div>

@@ -1,3 +1,5 @@
+import msu_e_library from "../../assets/msun-e-library.jpeg";
+
 export const MSU_COORDS = [8.428618869777717, 124.28762800990076];
 
 // export const LOCATIONS = [
@@ -190,6 +192,12 @@ export const LOCATIONS = [
     room has beds and private toilet and bathroom. The
     rates range from Php 250.00 to Php 1,800 per day.`,
         image: `https://msunaawan.edu.ph/wp-content/uploads/2023/03/IMG_8161-1024x683.jpg`,
+        event: {},
+        contactInformation: {
+            phone: "+63 917 180 1040",
+            email: "library@msunaawan.edu.ph"
+        },
+        status: "Under Construction",
         colorIdentifier: { color: "transparent", fillColor: "transparent" },
         coords: [
             [8.426076892378472, 124.28705465051726],
@@ -211,84 +219,109 @@ export const LOCATIONS = [
         ],
     },
     {
-        title: "MSUN - CARES",
-        description: `The Campus Hostel is an establishment where the
-    students simulate exercises for housekeeping,
-    kitchen management, hotel administration, front
-    office procedures, and other operations. The Hostel
-    has air-conditioned rooms that provide good and safe
-    facilities of for convenient lodging of guests. Each
-    room has beds and private toilet and bathroom. The
-    rates range from Php 250.00 to Php 1,800 per day.`,
-        image: `https://msunaawan.edu.ph/wp-content/uploads/2023/03/IMG_8161-1024x683.jpg`,
+        title: "MSUN E-Library",
+        description: `The E-Library is currently under construction at MSU Naawan. Once completed, it will serve as a modern hub for academic research, study, and digital resources, supporting the academic needs of students, faculty, and staff. This space will be integral to the university's educational infrastructure, providing a wide range of services and resources for the MSUN community.`,
+        image: msu_e_library,
+        event: {
+            title: "Data Privacy Management System (DPMS)",
+            date: "September 16, 2023",
+            time: "9:00 AM",
+            description:
+                "This session will introduce the Data Privacy Management System (DPMS) and engage key stakeholders in discussions.",
+            link: "https://indigo21uk.sharepoint.com/sites/MSU-test9/_layouts/15/Event.aspx?ListGuid=b2269384-ec7f-4959-be38-b06663a01115&ItemId=2",
+        },
+        contactInformation: {
+            phone: "+63 917 180 1040",
+            email: "library@msunaawan.edu.ph"
+        },
+        status: "Under Construction",
         colorIdentifier: { color: "transparent", fillColor: "transparent" },
         coords: [
-            [8.431339669252074, 124.28861438636258],
-            [8.431278624681523, 124.28907037366194],
-            [8.431103453251644, 124.28904623315785],
-            [8.431164497849865, 124.28859024585849],
+            [8.42934983646258, 124.2883461713791],
+            [8.429317997651946, 124.28849637508394],
+            [8.429012875583952, 124.28842395544054],
+            [8.429044714419687, 124.28826838731769],
         ],
     },
+    // {
+    //     title: "MSUN - CARES",
+    //     description: `The Campus Hostel is an establishment where the
+    // students simulate exercises for housekeeping,
+    // kitchen management, hotel administration, front
+    // office procedures, and other operations. The Hostel
+    // has air-conditioned rooms that provide good and safe
+    // facilities of for convenient lodging of guests. Each
+    // room has beds and private toilet and bathroom. The
+    // rates range from Php 250.00 to Php 1,800 per day.`,
+    //     image: `https://msunaawan.edu.ph/wp-content/uploads/2023/03/IMG_8161-1024x683.jpg`,
+    //     colorIdentifier: { color: "transparent", fillColor: "transparent" },
+    //     coords: [
+    //         [8.431339669252074, 124.28861438636258],
+    //         [8.431278624681523, 124.28907037366194],
+    //         [8.431103453251644, 124.28904623315785],
+    //         [8.431164497849865, 124.28859024585849],
+    //     ],
+    // },
 
-    {
-        title: "Research Facilities and Laboratories",
-        description: `The Campus Hostel is an establishment where the
-    students simulate exercises for housekeeping,
-    kitchen management, hotel administration, front
-    office procedures, and other operations. The Hostel
-    has air-conditioned rooms that provide good and safe
-    facilities of for convenient lodging of guests. Each
-    room has beds and private toilet and bathroom. The
-    rates range from Php 250.00 to Php 1,800 per day.`,
-        image: `https://msunaawan.edu.ph/wp-content/uploads/2023/03/IMG_8161-1024x683.jpg`,
-        colorIdentifier: { color: "transparent", fillColor: "transparent" },
-        coords: [
-            [8.431339669252074, 124.28861438636258],
-            [8.431278624681523, 124.28907037366194],
-            [8.431103453251644, 124.28904623315785],
-            [8.431164497849865, 124.28859024585849],
-        ],
-    },
+    // {
+    //     title: "Research Facilities and Laboratories",
+    //     description: `The Campus Hostel is an establishment where the
+    // students simulate exercises for housekeeping,
+    // kitchen management, hotel administration, front
+    // office procedures, and other operations. The Hostel
+    // has air-conditioned rooms that provide good and safe
+    // facilities of for convenient lodging of guests. Each
+    // room has beds and private toilet and bathroom. The
+    // rates range from Php 250.00 to Php 1,800 per day.`,
+    //     image: `https://msunaawan.edu.ph/wp-content/uploads/2023/03/IMG_8161-1024x683.jpg`,
+    //     colorIdentifier: { color: "transparent", fillColor: "transparent" },
+    //     coords: [
+    //         [8.431339669252074, 124.28861438636258],
+    //         [8.431278624681523, 124.28907037366194],
+    //         [8.431103453251644, 124.28904623315785],
+    //         [8.431164497849865, 124.28859024585849],
+    //     ],
+    // },
 
-    {
-        title: "MSUN Extension Division",
-        description: `The Campus Hostel is an establishment where the
-    students simulate exercises for housekeeping,
-    kitchen management, hotel administration, front
-    office procedures, and other operations. The Hostel
-    has air-conditioned rooms that provide good and safe
-    facilities of for convenient lodging of guests. Each
-    room has beds and private toilet and bathroom. The
-    rates range from Php 250.00 to Php 1,800 per day.`,
-        image: `https://msunaawan.edu.ph/wp-content/uploads/2023/03/IMG_8161-1024x683.jpg`,
-        colorIdentifier: { color: "transparent", fillColor: "transparent" },
-        coords: [
-            [8.431339669252074, 124.28861438636258],
-            [8.431278624681523, 124.28907037366194],
-            [8.431103453251644, 124.28904623315785],
-            [8.431164497849865, 124.28859024585849],
-        ],
-    },
+    // {
+    //     title: "MSUN Extension Division",
+    //     description: `The Campus Hostel is an establishment where the
+    // students simulate exercises for housekeeping,
+    // kitchen management, hotel administration, front
+    // office procedures, and other operations. The Hostel
+    // has air-conditioned rooms that provide good and safe
+    // facilities of for convenient lodging of guests. Each
+    // room has beds and private toilet and bathroom. The
+    // rates range from Php 250.00 to Php 1,800 per day.`,
+    //     image: `https://msunaawan.edu.ph/wp-content/uploads/2023/03/IMG_8161-1024x683.jpg`,
+    //     colorIdentifier: { color: "transparent", fillColor: "transparent" },
+    //     coords: [
+    //         [8.431339669252074, 124.28861438636258],
+    //         [8.431278624681523, 124.28907037366194],
+    //         [8.431103453251644, 124.28904623315785],
+    //         [8.431164497849865, 124.28859024585849],
+    //     ],
+    // },
 
-    {
-        title: "MSUN Tennis Court",
-        description: `The Campus Hostel is an establishment where the
-    students simulate exercises for housekeeping,
-    kitchen management, hotel administration, front
-    office procedures, and other operations. The Hostel
-    has air-conditioned rooms that provide good and safe
-    facilities of for convenient lodging of guests. Each
-    room has beds and private toilet and bathroom. The
-    rates range from Php 250.00 to Php 1,800 per day.`,
-        image: `https://msunaawan.edu.ph/wp-content/uploads/2023/03/IMG_8161-1024x683.jpg`,
-        colorIdentifier: { color: "transparent", fillColor: "transparent" },
-        coords: [
-            [8.431339669252074, 124.28861438636258],
-            [8.431278624681523, 124.28907037366194],
-            [8.431103453251644, 124.28904623315785],
-            [8.431164497849865, 124.28859024585849],
-        ],
-    },
+    // {
+    //     title: "MSUN Tennis Court",
+    //     description: `The Campus Hostel is an establishment where the
+    // students simulate exercises for housekeeping,
+    // kitchen management, hotel administration, front
+    // office procedures, and other operations. The Hostel
+    // has air-conditioned rooms that provide good and safe
+    // facilities of for convenient lodging of guests. Each
+    // room has beds and private toilet and bathroom. The
+    // rates range from Php 250.00 to Php 1,800 per day.`,
+    //     image: `https://msunaawan.edu.ph/wp-content/uploads/2023/03/IMG_8161-1024x683.jpg`,
+    //     colorIdentifier: { color: "transparent", fillColor: "transparent" },
+    //     coords: [
+    //         [8.431339669252074, 124.28861438636258],
+    //         [8.431278624681523, 124.28907037366194],
+    //         [8.431103453251644, 124.28904623315785],
+    //         [8.431164497849865, 124.28859024585849],
+    //     ],
+    // },
 
     // {
     //     title: "MSUN - CARES",
