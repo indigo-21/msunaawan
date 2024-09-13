@@ -192,10 +192,10 @@ export const LOCATIONS = [
     room has beds and private toilet and bathroom. The
     rates range from Php 250.00 to Php 1,800 per day.`,
         image: `https://msunaawan.edu.ph/wp-content/uploads/2023/03/IMG_8161-1024x683.jpg`,
-        event: {},
+        event: [],
         contactInformation: {
             phone: "+63 917 180 1040",
-            email: "library@msunaawan.edu.ph"
+            email: "library@msunaawan.edu.ph",
         },
         status: "Under Construction",
         colorIdentifier: { color: "transparent", fillColor: "transparent" },
@@ -222,17 +222,43 @@ export const LOCATIONS = [
         title: "MSUN E-Library",
         description: `The E-Library is currently under construction at MSU Naawan. Once completed, it will serve as a modern hub for academic research, study, and digital resources, supporting the academic needs of students, faculty, and staff. This space will be integral to the university's educational infrastructure, providing a wide range of services and resources for the MSUN community.`,
         image: msu_e_library,
-        event: {
-            title: "Data Privacy Management System (DPMS)",
-            date: "September 16, 2023",
-            time: "9:00 AM",
-            description:
-                "This session will introduce the Data Privacy Management System (DPMS) and engage key stakeholders in discussions.",
-            link: "https://indigo21uk.sharepoint.com/sites/MSU-test9/_layouts/15/Event.aspx?ListGuid=b2269384-ec7f-4959-be38-b06663a01115&ItemId=2",
-        },
+        event: [
+            {
+                title: "Data Privacy Management System (DPMS)",
+                date: "September 16, 2024",
+                time: "9:00 AM",
+                description:
+                    "This session will introduce the Data Privacy Management System (DPMS) and engage key stakeholders in discussions.",
+                link: "https://indigo21uk.sharepoint.com/sites/MSU-test9/_layouts/15/Event.aspx?ListGuid=b2269384-ec7f-4959-be38-b06663a01115&ItemId=2",
+            },
+            {
+                title: "Digital Engagement Platform Configuration (DEP)",
+                date: "September 16, 2024",
+                time: "1:00 PM",
+                description:
+                    "The Digital Engagement Platform (DEP) session will focus on project updates and development progress.",
+                link: "https://indigo21uk.sharepoint.com/sites/MSU-test9/_layouts/15/Event.aspx?ListGuid=b2269384-ec7f-4959-be38-b06663a01115&ItemId=2",
+            },
+            {
+                title: "Document Tracking System (DTS)",
+                date: "September 17, 2024",
+                time: "9:00 AM",
+                description:
+                    "The presentation will introduce the Document Tracking System (DTS) to relevant participants.",
+                link: "https://indigo21uk.sharepoint.com/sites/MSU-test9/_layouts/15/Event.aspx?ListGuid=b2269384-ec7f-4959-be38-b06663a01115&ItemId=2",
+            },
+            {
+                title: "Incident Reporting System (IRS)",
+                date: "September 17, 2024",
+                time: "1:00 PM",
+                description:
+                    "The Incident Reporting System (IRS) will be presented, with discussions on its implementation and feedback gathering.",
+                link: "https://indigo21uk.sharepoint.com/sites/MSU-test9/_layouts/15/Event.aspx?ListGuid=b2269384-ec7f-4959-be38-b06663a01115&ItemId=2",
+            },
+        ],
         contactInformation: {
             phone: "+63 917 180 1040",
-            email: "library@msunaawan.edu.ph"
+            email: "library@msunaawan.edu.ph",
         },
         status: "Under Construction",
         colorIdentifier: { color: "transparent", fillColor: "transparent" },

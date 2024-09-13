@@ -3,5 +3,8 @@
 }
 
 .leaflet-popup-content {
-    width: 700px !important;
+    margin: 30px 5px 13px 20px !important;
+    width: 350px !important;
+    height: 500px;
+    overflow-y: auto;
 }

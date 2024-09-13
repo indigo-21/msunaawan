@@ -9,20 +9,13 @@ import {
     Tooltip,
     useMapEvents,
 } from "react-leaflet";
-import {
-    ArrowTopRightOnSquareIcon,
-    BuildingOffice2Icon,
-    CalendarDaysIcon,
-    IdentificationIcon,
-    MapPinIcon,
-} from "@heroicons/react/16/solid";
-import { Button, Typography } from "@material-tailwind/react";
 import { Icon, LatLngBounds } from "leaflet";
 import { MSU_COORDS, LOCATIONS } from "./MapCoords";
 import MapList from "./MapList";
 import marker from "../../assets/marker.png";
 import "./MapStyle.css";
 import "leaflet/dist/leaflet.css";
+import MapPopUp from "./MapPopUp";
 
 const myIcon = new Icon({
     iconUrl: marker,
@@ -32,6 +25,7 @@ const myIcon = new Icon({
 export default function MapCustom() {
     const bounds = new LatLngBounds([8.4247, 124.28599], [8.43197, 124.29189]);
     const [mapMarker, setMapMarker] = useState([0, 0]);
+    // const [isLoading, setIsLoading] = useState(true);
 
     const [location, setLocation] = useState([]);
     const LocationFinderDummy = () => {
@@ -53,10 +47,17 @@ export default function MapCustom() {
         setMapMarker([data[0], data[1]]);
     };
 
-    // console.log(mapMarker);
+    // useEffect(() => {
+    //     // Simulating data fetch or other asynchronous operation
+    //     setTimeout(() => {
+    //         setIsLoading(false); // Set loading to false once the data or content is ready
+    //     }, 1000); // Simulate a 2-second loading time
+    // }, []);
 
     return (
         <div className="flex flex-row">
+            {/* {!isLoading ? (
+                <> */}
             <section className="basis-1/5 bg-white">
                 <div className="container my-10">
                     <MapList onClickBuilding={handleClick} />
@@ -89,7 +90,6 @@ export default function MapCustom() {
                         zIndex={10}
                     />
                     {LOCATIONS.map((locations, index) => {
-                        const locationCoords = `https://www.google.com/maps/dir/?api=1&destination=${locations.coords[0][0]},${locations.coords[0][1]}`;
                         return (
                             <Polygon
                                 id={index}
@@ -101,205 +101,24 @@ export default function MapCustom() {
                                 <Tooltip direction="bottom" opacity={1}>
                                     {locations.title}
                                 </Tooltip>
-                                <Marker position={mapMarker} icon={myIcon} />
+                                <Marker
+                                    position={mapMarker}
+                                    icon={myIcon}
+                                ></Marker>
                                 <Popup>
-                                    <div className="grid grid-cols-2 gap-4">
-                                        <section>
-                                            <section className="text-center mt-3">
-                                                <img
-                                                    src={locations.image}
-                                                    alt={locations.title}
-                                                />
-                                                <Typography
-                                                    variant="h4"
-                                                    className="mt-5 mb-3"
-                                                >
-                                                    {locations.title}
-                                                </Typography>
-                                                <div className="grid grid-cols-2 gap-4">
-                                                    <a
-                                                        href={locationCoords}
-                                                        target="_blank"
-                                                    >
-                                                        <Button className="flex gap-2 justify-between w-full">
-                                                            <MapPinIcon className="h-4 w-4" />
-                                                            Navigate
-                                                        </Button>
-                                                    </a>
-                                                    <a
-                                                        href="https://indigo21uk.sharepoint.com/sites/MSU-test9/SitePages/College-Marine-and-Allied-Sciences.aspx"
-                                                        target="_blank"
-                                                    >
-                                                        <Button className="flex gap-2 justify-between w-full">
-                                                            <ArrowTopRightOnSquareIcon className="h-4 w-4" />
-                                                            View Page
-                                                        </Button>
-                                                    </a>
-                                                </div>
-                                            </section>
-
-                                            <Typography variant="small">
-                                                {locations.description.length >
-                                                150
-                                                    ? `${locations.description.substring(
-                                                          0,
-                                                          150,
-                                                      )} ...`
-                                                    : locations.description}
-                                            </Typography>
-                                            <Typography variant="small">
-                                                <a
-                                                    href="https://indigo21uk.sharepoint.com/sites/MSU-test9/SitePages/College-Marine-and-Allied-Sciences.aspx"
-                                                    target="_blank"
-                                                >
-                                                    <label className="flex gap-1 w-auto cursor-pointer">
-                                                        Read More
-                                                        <ArrowTopRightOnSquareIcon className="h-4 w-4" />
-                                                    </label>
-                                                </a>
-                                            </Typography>
-                                        </section>
-
-                                        <section>
-                                            {Object.keys(locations.event)
-                                                .length !== 0 && (
-                                                <section className="border-4 my-3">
-                                                    <div className="flex">
-                                                        <Typography
-                                                            variant="h5"
-                                                            className="w-full mt-5 flex gap-2 px-3"
-                                                        >
-                                                            <CalendarDaysIcon className="w-6 h-6" />
-                                                            Event
-                                                        </Typography>
-                                                        <a
-                                                            href={
-                                                                locations.event
-                                                                    .link
-                                                            }
-                                                            target="_blank"
-                                                        >
-                                                            <ArrowTopRightOnSquareIcon className="h-5 w-5 m-2" />
-                                                        </a>
-                                                    </div>
-                                                    <div className="grid px-3">
-                                                        <Typography
-                                                            variant="h6"
-                                                            className="mt-1 mb-3"
-                                                        >
-                                                            {
-                                                                locations.event
-                                                                    .title
-                                                            }
-                                                        </Typography>
-                                                        <div className="flex gap-3">
-                                                            <Typography
-                                                                variant="small"
-                                                                className="!-mt-3 mb-3"
-                                                            >
-                                                                {
-                                                                    locations
-                                                                        .event
-                                                                        .date
-                                                                }
-                                                            </Typography>
-                                                            <Typography
-                                                                variant="small"
-                                                                className="!-mt-3 mb-3"
-                                                            >
-                                                                |
-                                                            </Typography>
-                                                            <Typography
-                                                                variant="small"
-                                                                className="!-mt-3 mb-3"
-                                                            >
-                                                                {
-                                                                    locations
-                                                                        .event
-                                                                        .time
-                                                                }
-                                                            </Typography>
-                                                        </div>
-                                                    </div>
-                                                </section>
-                                            )}
-
-                                            <div className="border-4 my-3">
-                                                <div className="flex">
-                                                    <Typography
-                                                        variant="h5"
-                                                        className="w-full mt-5 flex gap-2 px-3"
-                                                    >
-                                                        <IdentificationIcon className="w-6 h-6" />
-                                                        Contact Information
-                                                    </Typography>
-                                                </div>
-                                                <div className="grid px-3">
-                                                    <Typography
-                                                        variant="h6"
-                                                        className="mt-1 mb-3"
-                                                    >
-                                                        Contact Number:
-                                                    </Typography>
-                                                    <Typography
-                                                        variant="small"
-                                                        className="!-mt-3 mb-3"
-                                                    >
-                                                        {
-                                                            locations
-                                                                .contactInformation
-                                                                .phone
-                                                        }
-                                                    </Typography>
-                                                </div>
-
-                                                <div className="grid px-3 !-mt-4">
-                                                    <Typography
-                                                        variant="h6"
-                                                        className="mt-1 mb-3"
-                                                    >
-                                                        Email:
-                                                    </Typography>
-                                                    <Typography
-                                                        variant="small"
-                                                        className="!-mt-3 mb-3"
-                                                    >
-                                                        {
-                                                            locations
-                                                                .contactInformation
-                                                                .email
-                                                        }
-                                                    </Typography>
-                                                </div>
-                                            </div>
-
-                                            <div className="border-4 my-3">
-                                                <div className="flex">
-                                                    <Typography
-                                                        variant="h5"
-                                                        className="w-full mt-5 flex gap-2 px-3"
-                                                    >
-                                                        <BuildingOffice2Icon className="w-6 h-6" />
-                                                        Status
-                                                    </Typography>
-                                                </div>
-                                                <div className="grid px-3">
-                                                    <Typography
-                                                        variant="h6"
-                                                        className="mt-1 mb-3"
-                                                    >
-                                                        {locations.status}
-                                                    </Typography>
-                                                </div>
-                                            </div>
-                                        </section>
-                                    </div>
+                                    <MapPopUp locations={locations} />
                                 </Popup>
                             </Polygon>
                         );
                     })}
                 </MapContainer>
             </section>
+            {/* </>
+            ) : (
+                <div className="flex justify-center items-center w-screen h-screen">
+                    <div className="rounded-full h-20 w-20 bg-black animate-ping"></div>
+                </div>
+            )} */}
         </div>
     );
 }
