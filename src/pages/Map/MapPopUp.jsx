@@ -1,6 +1,7 @@
 import {
     ArrowTopRightOnSquareIcon,
     BuildingOffice2Icon,
+    CalendarDateRangeIcon,
     CalendarDaysIcon,
     IdentificationIcon,
     MapPinIcon,
@@ -87,7 +88,7 @@ const MapPopUp = ({ locations }) => {
                                         </div> */}
                                         <Typography
                                             variant="h6"
-                                            className="mt-1 mb-3"
+                                            className="mt-1"
                                         >
                                             <a
                                                 href={event.link}
@@ -101,13 +102,15 @@ const MapPopUp = ({ locations }) => {
                                                       )} ...`
                                                     : event.title}
                                             </a>
-                                        </Typography>
 
-                                        <Typography
-                                            variant="small"
-                                            className=" mb-3"
-                                        >
-                                            {event.date}
+                                            <div className="flex gap-1">
+                                                <CalendarDateRangeIcon className="w-4 h-4 my-auto" />
+                                                <Typography
+                                                    variant="small"
+                                                >
+                                                    {event.date}
+                                                </Typography>
+                                            </div>
                                         </Typography>
                                     </div>
                                 </div>

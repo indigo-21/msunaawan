@@ -5,7 +5,7 @@ const CarouselComponent = ({ children }) => {
         <Carousel
             autoplayDelay={10000}
             transition={{ duration: 2 }}
-            className="h-52 overflow-hidden mt-4"
+            className="h-48 overflow-hidden mt-4"
             navigation={({ setActiveIndex, activeIndex, length }) => (
                 <div className="absolute bottom-4 left-2/4 z-50 flex -translate-x-2/4 gap-2">
                     {new Array(length).fill("").map((_, i) => (
@@ -27,7 +27,7 @@ const CarouselComponent = ({ children }) => {
                     color="black"
                     size="lg"
                     onClick={handlePrev}
-                    className="!absolute top-2/4 left-0 translate-y-16"
+                    className="!absolute top-2/4 left-0 translate-y-12"
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -51,7 +51,7 @@ const CarouselComponent = ({ children }) => {
                     color="black"
                     size="lg"
                     onClick={handleNext}
-                    className="!absolute top-2/4 !right-0 translate-y-16"
+                    className="!absolute top-2/4 !right-0 translate-y-12"
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
