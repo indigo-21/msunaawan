@@ -13,7 +13,7 @@ const MapPopUp = ({ locations }) => {
 
     return (
         <div className="grid grid-cols-1 pr-4">
-            <section className="text-center mt-3">
+            <section className="text-center ">
                 <img src={locations.image} alt={locations.title} />
                 <Typography variant="h4" className="mt-5 mb-3">
                     {locations.title}
@@ -42,6 +42,7 @@ const MapPopUp = ({ locations }) => {
                     ? `${locations.description.substring(0, 150)} ...`
                     : locations.description}
             </Typography>
+
             <Typography variant="small">
                 <a
                     href="https://indigo21uk.sharepoint.com/sites/MSU-test9/SitePages/College-Marine-and-Allied-Sciences.aspx"
@@ -54,7 +55,7 @@ const MapPopUp = ({ locations }) => {
                 </a>
             </Typography>
 
-            <Typography variant="h6" className="w-full mt-5 flex gap-2 px-3">
+            <Typography variant="h6" className="w-full mt-2 flex gap-2 px-3">
                 <CalendarDaysIcon className="w-6 h-6" />
                 Event
             </Typography>
@@ -62,49 +63,87 @@ const MapPopUp = ({ locations }) => {
                 <CarouselComponent>
                     {locations.event.map((event, key) => {
                         return (
-                            <section className="border-4 " key={key}>
-                                <section>
-                                    <div className="flex float-end">
-                                        <a href={event.link} target="_blank">
-                                            <ArrowTopRightOnSquareIcon className="h-5 w-5 m-2" />
-                                        </a>
-                                    </div>
-                                    <div className="grid px-3">
+                            <section
+                                className="flex flex-row border-solid border-gray border-2 "
+                                key={key}
+                            >
+                                <div className="basis-1/3 bg-black p-2 align-center content-center">
+                                    <Typography
+                                        variant="h5"
+                                        className="text-center p-1 text-white "
+                                    >
+                                        {event.time}
+                                    </Typography>
+                                </div>
+                                <div className="basis-2/3">
+                                    <div className="p-2">
+                                        {/* <div className="flex float-end">
+                                            <a
+                                                href={event.link}
+                                                target="_blank"
+                                            >
+                                                <ArrowTopRightOnSquareIcon className="h-4 w-4 m-2" />
+                                            </a>
+                                        </div> */}
                                         <Typography
                                             variant="h6"
                                             className="mt-1 mb-3"
                                         >
-                                            {event.title.length > 45
-                                                ? `${event.title.substring(
-                                                      0,
-                                                      45,
-                                                  )} ...`
-                                                : event.title}
-                                            {}
+                                            <a
+                                                href={event.link}
+                                                target="_blank"
+                                                className="!text-gray-900 hover:!text-gray-700"
+                                            >
+                                                {event.title.length > 30
+                                                    ? `${event.title.substring(
+                                                          0,
+                                                          30,
+                                                      )} ...`
+                                                    : event.title}
+                                            </a>
                                         </Typography>
-                                        <div className="flex gap-3">
-                                            <Typography
-                                                variant="small"
-                                                className="!-mt-3 mb-3"
-                                            >
-                                                {event.date}
-                                            </Typography>
-                                            <Typography
-                                                variant="small"
-                                                className="!-mt-3 mb-3"
-                                            >
-                                                |
-                                            </Typography>
-                                            <Typography
-                                                variant="small"
-                                                className="!-mt-3 mb-3"
-                                            >
-                                                {event.time}
-                                            </Typography>
-                                        </div>
+
+                                        <Typography
+                                            variant="small"
+                                            className=" mb-3"
+                                        >
+                                            {event.date}
+                                        </Typography>
                                     </div>
-                                </section>
+                                </div>
                             </section>
+                            // <section className="border-4 " key={key}>
+                            //     <section>
+                            //         <div className="flex float-end">
+                            //             <a href={event.link} target="_blank">
+                            //                 <ArrowTopRightOnSquareIcon className="h-5 w-5 m-2" />
+                            //             </a>
+                            //         </div>
+                            //         <div className="grid px-3">
+                            //
+                            //             <div className="flex gap-3">
+                            //                 <Typography
+                            //                     variant="small"
+                            //                     className="!-mt-3 mb-3"
+                            //                 >
+                            //                     {event.date}
+                            //                 </Typography>
+                            //                 <Typography
+                            //                     variant="small"
+                            //                     className="!-mt-3 mb-3"
+                            //                 >
+                            //                     |
+                            //                 </Typography>
+                            //                 <Typography
+                            //                     variant="small"
+                            //                     className="!-mt-3 mb-3"
+                            //                 >
+                            //                     {event.time}
+                            //                 </Typography>
+                            //             </div>
+                            //         </div>
+                            //     </section>
+                            // </section>
                         );
                     })}
                 </CarouselComponent>
