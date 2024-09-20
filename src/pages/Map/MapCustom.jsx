@@ -81,14 +81,14 @@ export default function MapCustom() {
                     <TileLayer
                         attribution="Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community"
                         url="https://www.google.cn/maps/vt?lyrs=y@189&gl=cn&x={x}&y={y}&z={z}"
-                        opacity={0.2}
+                        // opacity={0.2}
                     />
-                    <ImageOverlay
+                    {/* <ImageOverlay
                         url="../../images/msunaawan.png"
                         bounds={bounds}
                         opacity={1}
                         zIndex={10}
-                    />
+                    /> */}
                     {LOCATIONS.map((locations, index) => {
                         return (
                             <Polygon
