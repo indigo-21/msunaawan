@@ -1,5 +1,5 @@
 const withMT = require("@material-tailwind/react/utils/withMT");
- 
+
 module.exports = withMT({
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
@@ -26,7 +26,16 @@ module.exports = withMT({
       colors: {
         primary: "#191970",
         secondary: "#FFDF00",
-      }
+      },
+      animation: {
+        'rotate': 'rotate 2s linear',
+      },
+      keyframes: {
+        rotate: {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
+      },
     },
     fontFamily: {
       sans: ["Poppins", "sans-serif"],

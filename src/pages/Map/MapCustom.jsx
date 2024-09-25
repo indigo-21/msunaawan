@@ -5,27 +5,34 @@ import {
     Marker,
     Polygon,
     Popup,
+    SVGOverlay,
     TileLayer,
     Tooltip,
     useMapEvents,
 } from "react-leaflet";
-import { Icon, LatLngBounds } from "leaflet";
+import { Icon, LatLng, LatLngBounds } from "leaflet";
 import { MSU_COORDS, LOCATIONS } from "./MapCoords";
 import MapList from "./MapList";
 import marker from "../../assets/marker.png";
 import "./MapStyle.css";
 import "leaflet/dist/leaflet.css";
 import MapPopUp from "./MapPopUp";
+import { MapPinIcon } from "@heroicons/react/16/solid";
 
 const myIcon = new Icon({
     iconUrl: marker,
     iconSize: [42, 42],
+    iconAnchor: [10, 35],
 });
 
 export default function MapCustom() {
     const bounds = new LatLngBounds([8.4247, 124.28599], [8.43197, 124.29189]);
     const [mapMarker, setMapMarker] = useState([0, 0]);
     // const [isLoading, setIsLoading] = useState(true);
+    const [openBottom, setOpenBottom] = useState(false);
+    const [mapData, setMapData] = useState({});
+
+    const closeDrawerBottom = () => setOpenBottom(false);
 
     const [location, setLocation] = useState([]);
     const LocationFinderDummy = () => {
@@ -66,9 +73,9 @@ export default function MapCustom() {
             <section className=" basis-4/5">
                 <MapContainer
                     center={MSU_COORDS}
-                    zoom={17.4}
-                    minZoom={17}
-                    maxZoom={21}
+                    zoom={18}
+                    minZoom={16}
+                    maxZoom={18}
                     scrollWheelZoom={false}
                     maxBounds={[
                         [8.438145883163832, 124.28256145709999],
@@ -80,7 +87,7 @@ export default function MapCustom() {
                     <LocationFinderDummy />
                     <TileLayer
                         attribution="Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community"
-                        url="https://www.google.cn/maps/vt?lyrs=y@189&gl=cn&x={x}&y={y}&z={z}"
+                        url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
                         // opacity={0.2}
                     />
                     {/* <ImageOverlay
@@ -89,30 +96,106 @@ export default function MapCustom() {
                         opacity={1}
                         zIndex={10}
                     /> */}
-                    {LOCATIONS.map((locations, index) => {
+                    {LOCATIONS.map((location, index) => {
                         return (
                             <Polygon
                                 id={index}
                                 key={index}
                                 weight={2}
-                                pathOptions={locations.colorIdentifier}
-                                positions={locations.coords}
+                                pathOptions={location.colorIdentifier}
+                                className="!bg-black"
+                                positions={location.coords}
+                                eventHandlers={{
+                                    click: () => {
+                                        setOpenBottom(true);
+                                        setMapData({ location });
+                                    },
+                                }}
                             >
-                                <Tooltip direction="bottom" opacity={1}>
-                                    {locations.title}
-                                </Tooltip>
+                                <SVGOverlay
+                                    bounds={location.coords}
+                                    className="!w-[160px] !h-[160px] -ml-[3.3rem] -mt-[3.3rem] rounded-full hover:border-dashed hover:border-8 hover:border-gray-600 focus:outline-none hover:cursor-pointer hover:animate-pulse"
+                                >
+                                    {/* <rect
+                                        x="0"
+                                        y="0"
+                                        width="100%"
+                                        height="100%"
+                                        fill="blue"
+                                        opacity={0.2}
+                                    /> */}
+                                    <svg style={{ pointerEvents: "all" }} className="!bg-black">
+                                        <text
+                                            x="50%"
+                                            y="50%"
+                                            textAnchor="middle"
+                                            alignmentBaseline="middle"
+                                            stroke="black"
+                                            fontSize={13}
+                                            strokeWidth={0}
+                                            onClick={() => {
+                                                setOpenBottom(true);
+                                                setMapData({ location });
+                                            }}
+                                        >
+                                            {location.title
+                                                .split(" ")
+                                                .map((word, index) => (
+                                                    <tspan
+                                                        key={index}
+                                                        x="50%"
+                                                        dy={
+                                                            index === 0
+                                                                ? "0"
+                                                                : "1.2em"
+                                                        }
+                                                    >
+                                                        {word}
+                                                    </tspan>
+                                                ))}
+                                        </text>
+                                    </svg>
+                                </SVGOverlay>
+                                {/* <Tooltip
+                                    direction="bottom"
+                                    opacity={1}
+                                    // permanent={true}
+                                >
+                                    <div className="flex items-center justify-center">
+                                        <MapPinIcon width={30} height={30} />
+                                        <h4 className="ml-1 text-center">
+                                            {location.title}
+                                        </h4>
+                                    </div>
+                                </Tooltip> */}
                                 <Marker
                                     position={mapMarker}
                                     icon={myIcon}
+                                    className="pb-20"
+                                    eventHandlers={{
+                                        click: () => {
+                                            setOpenBottom(true);
+                                            setMapData({ location });
+                                        },
+                                    }}
                                 ></Marker>
-                                <Popup>
-                                    <MapPopUp locations={locations} />
-                                </Popup>
+                                {/* <Popup>
+                                    <MapPopUp locations={location} />
+                                </Popup> */}
                             </Polygon>
                         );
                     })}
                 </MapContainer>
             </section>
+
+            {Object.keys(mapData).length > 0 && (
+                <MapPopUp
+                    key={location}
+                    openBottom={openBottom}
+                    closeDrawerBottom={closeDrawerBottom}
+                    mapData={mapData}
+                />
+            )}
             {/* </>
             ) : (
                 <div className="flex justify-center items-center w-screen h-screen">
