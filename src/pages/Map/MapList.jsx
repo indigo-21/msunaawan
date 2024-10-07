@@ -9,19 +9,27 @@ export default function MapList({ onClickBuilding }) {
     const handleKeyDown = (event) => {
         if (event.keyCode === 8) {
             setLocationList(LOCATIONS);
+        } else {
+            setLocationList(
+                locationList.filter((location) =>
+                    location.title
+                        .toLowerCase()
+                        .includes(search.current.value.toLowerCase()),
+                ),
+            );
         }
     };
 
-    const handleClick = () => {
-        setLocationList(
-            locationList.filter((location) =>
-                location.title
-                    .toLowerCase()
-                    .includes(search.current.value.toLowerCase()),
-            ),
+    // const handleClick = () => {
+    //     setLocationList(
+    //         locationList.filter((location) =>
+    //             location.title
+    //                 .toLowerCase()
+    //                 .includes(search.current.value.toLowerCase()),
+    //         ),
 
-        );
-    };
+    //     );
+    // };
 
     // const handleClickList = (coordinates) => {
     //     alert(coordinates);
@@ -53,21 +61,29 @@ export default function MapList({ onClickBuilding }) {
                         onKeyDown={(event) => handleKeyDown(event)}
                     />
 
-                    <button
+                    {/* <button
                         className="h-10 ml-1 text-white text-sm my-auto px-3 flex items-center bg-primary rounded hover:bg-[#1e1e85]"
                         type="button"
                         onClick={handleClick}
                     >
                         Search
-                    </button>
+                    </button> */}
                 </div>
             </div>
             <Card className="w-full bg-gray-100">
                 {locationList.length > 0 && (
-                    <List >
+                    <List>
                         {locationList.map((location, key) => {
                             return (
-                                <ListItem key={key} onClick={() => onClickBuilding([location.coords[0][0], location.coords[0][1]])}>
+                                <ListItem
+                                    key={key}
+                                    onClick={() =>
+                                        onClickBuilding([
+                                            location.coords[0][0],
+                                            location.coords[0][1],
+                                        ])
+                                    }
+                                >
                                     <div>
                                         <Typography
                                             variant="h6"

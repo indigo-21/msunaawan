@@ -48,7 +48,6 @@ export default function MapCustom() {
     };
 
     const handleClick = (data, adjust = false) => {
-
         if (adjust) {
             setMapCenter([data[0] - 0.001, data[1]]);
         } else {
@@ -57,7 +56,7 @@ export default function MapCustom() {
         setMapMarker([data[0], data[1]]);
     };
 
-    // console.log(mapData);
+    console.log(mapMarker);
 
     return (
         <div className="flex flex-row">
@@ -93,18 +92,22 @@ export default function MapCustom() {
                     {LOCATIONS.map((location, index) => {
                         // console.log(location.coords);
                         // console.log("newLat" + latitude);
+                        // const newMarker = [
+                        //     location.coords[0][0],
+                        //     location.coords[0][1],
+                        // ];
+                        // console.log(newMarker);
                         return (
                             <Polygon
                                 id={index}
                                 key={index}
                                 weight={2}
                                 pathOptions={location.colorIdentifier}
-                                className="!bg-black"
                                 positions={location.coords}
                                 eventHandlers={{
                                     click: () => {
                                         setOpenBottom(true);
-                                        setMapData( location );
+                                        setMapData(location);
                                         handleClick(
                                             [
                                                 location.coords[0][0],
@@ -113,6 +116,18 @@ export default function MapCustom() {
                                             true,
                                         );
                                     },
+                                    // mouseover: (e) => {
+                                    //     e.target.setStyle({
+                                    //         fillColor: "newHoverColor", // Replace with your desired hover color
+                                    //     });
+                                    // },
+                                    // mouseout: (e) => {
+                                    //     e.target.setStyle({
+                                    //         fillColor:
+                                    //             location.colorIdentifier
+                                    //                 .fillColor, // Revert to the original color
+                                    //     });
+                                    // },
                                 }}
                             >
                                 <SVGOverlay
@@ -133,7 +148,7 @@ export default function MapCustom() {
                                             strokeWidth={0}
                                             onClick={() => {
                                                 setOpenBottom(true);
-                                                setMapData( location );
+                                                setMapData(location);
                                                 handleClick(
                                                     [
                                                         location.coords[0][0],
@@ -166,7 +181,7 @@ export default function MapCustom() {
                                     icon={myIcon}
                                     eventHandlers={{
                                         click: () => {
-                                            console.log(location.title);
+                                            // console.log(location);
                                             // setOpenBottom(true);
                                             // setMapData( location );
                                             // handleClick(
