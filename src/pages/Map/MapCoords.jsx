@@ -261,6 +261,31 @@ export const LOCATIONS = [
             [8.4293943, 124.2883834],
         ],
     },
+    {
+        title: "MSUN Extension Division",
+        description: `The Campus Hostel is an establishment where the
+    students simulate exercises for housekeeping,
+    kitchen management, hotel administration, front
+    office procedures, and other operations. The Hostel
+    has air-conditioned rooms that provide good and safe
+    facilities of for convenient lodging of guests. Each
+    room has beds and private toilet and bathroom. The
+    rates range from Php 250.00 to Php 1,800 per day.`,
+        image: msu_e_library,
+        event: [],
+        contactInformation: {
+            phone: "+63 917 180 1040",
+            email: "library@msunaawan.edu.ph",
+        },
+        status: "Under Construction",
+        colorIdentifier: { color: "transparent", fillColor: "transparent" },
+        coords: [
+            [8.431339, 124.288614],
+            [8.431278, 124.289070],
+            [8.431103, 124.289046],
+            [8.431164, 124.288590],
+        ],
+    },
 
     // {
     //     title: "MSUN - CARES",

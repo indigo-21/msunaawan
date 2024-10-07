@@ -6,7 +6,6 @@ import {
     SVGOverlay,
     TileLayer,
     useMap,
-    useMapEvents,
 } from "react-leaflet";
 import { Icon } from "leaflet";
 import { MSU_COORDS, LOCATIONS } from "./MapCoords";
@@ -15,6 +14,7 @@ import marker from "../../assets/marker.png";
 import "./MapStyle.css";
 import "leaflet/dist/leaflet.css";
 import MapPopUp from "./MapPopUp";
+import MapSidebarBurgerMenu from "./MapSidebarBurgerMenu";
 
 const myIcon = new Icon({
     iconUrl: marker,
@@ -28,9 +28,14 @@ export default function MapCustom() {
     const [openBottom, setOpenBottom] = useState(false);
     const [mapData, setMapData] = useState({});
 
-    const closeDrawerBottom = () => setOpenBottom(false);
+    const closeDrawerBottom = () => {
+        setOpenBottom(false);
+
+        handleClick([mapMarker[0], mapMarker[1]], false);
+    };
+
     const MapClickHandler = ({ data }) => {
-        console.log(data);
+        // console.log(data);
         const map = useMap();
 
         useEffect(() => {
@@ -42,19 +47,31 @@ export default function MapCustom() {
         return null;
     };
 
-    const handleClick = (data) => {
+    const handleClick = (data, adjust = false) => {
+
+        if (adjust) {
+            setMapCenter([data[0] - 0.001, data[1]]);
+        } else {
+            setMapCenter([data[0], data[1]]);
+        }
         setMapMarker([data[0], data[1]]);
-        setMapCenter([data[0], data[1]]);
     };
+
+    // console.log(mapData);
 
     return (
         <div className="flex flex-row">
-            <section className="basis-1/5 bg-white">
+            <section className="hidden lg:block lg:basis-1/5 bg-white">
                 <div className="container my-10">
                     <MapList onClickBuilding={handleClick} />
                 </div>
             </section>
-            <section className=" basis-4/5">
+            <section className="lg:hidden block absolute z-[99999] pl-10">
+                <div className="container my-2">
+                    <MapSidebarBurgerMenu onClickBuilding={handleClick} />
+                </div>
+            </section>
+            <section className="basis-full lg:basis-4/5">
                 <MapContainer
                     center={mapCenter}
                     zoom={18}
@@ -87,11 +104,14 @@ export default function MapCustom() {
                                 eventHandlers={{
                                     click: () => {
                                         setOpenBottom(true);
-                                        setMapData({ location });
-                                        handleClick([
-                                            location.coords[0][0],
-                                            location.coords[0][1],
-                                        ]);
+                                        setMapData( location );
+                                        handleClick(
+                                            [
+                                                location.coords[0][0],
+                                                location.coords[0][1],
+                                            ],
+                                            true,
+                                        );
                                     },
                                 }}
                             >
@@ -113,11 +133,14 @@ export default function MapCustom() {
                                             strokeWidth={0}
                                             onClick={() => {
                                                 setOpenBottom(true);
-                                                setMapData({ location });
-                                                handleClick([
-                                                    location.coords[0][0],
-                                                    location.coords[0][1],
-                                                ]);
+                                                setMapData( location );
+                                                handleClick(
+                                                    [
+                                                        location.coords[0][0],
+                                                        location.coords[0][1],
+                                                    ],
+                                                    true,
+                                                );
                                             }}
                                         >
                                             {location.title
@@ -141,11 +164,18 @@ export default function MapCustom() {
                                 <Marker
                                     position={mapMarker}
                                     icon={myIcon}
-                                    className="pb-20"
                                     eventHandlers={{
                                         click: () => {
-                                            setOpenBottom(true);
-                                            setMapData({ location });
+                                            console.log(location.title);
+                                            // setOpenBottom(true);
+                                            // setMapData( location );
+                                            // handleClick(
+                                            //     [
+                                            //         location.coords[0][0],
+                                            //         location.coords[0][1],
+                                            //     ],
+                                            //     true,
+                                            // );
                                         },
                                     }}
                                 ></Marker>
@@ -157,7 +187,7 @@ export default function MapCustom() {
 
             {Object.keys(mapData).length > 0 && (
                 <MapPopUp
-                    key={location}
+                    // key={location}
                     openBottom={openBottom}
                     closeDrawerBottom={closeDrawerBottom}
                     mapData={mapData}

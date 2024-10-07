@@ -54,7 +54,7 @@ export default function MapList({ onClickBuilding }) {
                     />
 
                     <button
-                        className="h-10 ml-1 text-white text-sm my-auto px-3 flex items-center bg-cyan-900 rounded hover:bg-cyan-800"
+                        className="h-10 ml-1 text-white text-sm my-auto px-3 flex items-center bg-primary rounded hover:bg-[#1e1e85]"
                         type="button"
                         onClick={handleClick}
                     >

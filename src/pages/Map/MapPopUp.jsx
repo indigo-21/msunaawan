@@ -23,7 +23,7 @@ export default function MapPopUp({ openBottom, closeDrawerBottom, mapData }) {
         contactInformation,
         status,
         event,
-    } = mapData.location;
+    } = mapData;
 
     const locationCoords = `https://www.google.com/maps/dir/?api=1&destination=${coords[0][0]},${coords[0][1]}`;
     return (
@@ -97,7 +97,7 @@ export default function MapPopUp({ openBottom, closeDrawerBottom, mapData }) {
                         </div>
                         <div className="grid grid-cols-2 gap-4 ">
                             <a href={locationCoords} target="_blank">
-                                <Button className="flex gap-2 justify-center w-full">
+                                <Button className="flex gap-2 justify-center w-full bg-primary">
                                     <MapPinIcon className="h-4 w-4" />
                                     Navigate
                                 </Button>
@@ -106,7 +106,7 @@ export default function MapPopUp({ openBottom, closeDrawerBottom, mapData }) {
                                 href="https://indigo21uk.sharepoint.com/sites/MSU-test9/SitePages/College-Marine-and-Allied-Sciences.aspx"
                                 target="_blank"
                             >
-                                <Button className="flex gap-2 justify-center w-full">
+                                <Button className="flex gap-2 justify-center w-full bg-primary">
                                     <ArrowTopRightOnSquareIcon className="h-4 w-4" />
                                     View Page
                                 </Button>
@@ -120,7 +120,7 @@ export default function MapPopUp({ openBottom, closeDrawerBottom, mapData }) {
                                     variant="h6"
                                     className="w-full mt-6 flex gap-2 px-3"
                                 >
-                                    <CalendarDaysIcon className="w-6 h-6" />
+                                    <CalendarDaysIcon className="w-6 h-6 text-primary" />
                                     Event
                                 </Typography>
                                 <CarouselComponent>
@@ -130,7 +130,7 @@ export default function MapPopUp({ openBottom, closeDrawerBottom, mapData }) {
                                                 className="border-solid border-gray border-2 "
                                                 key={key}
                                             >
-                                                <div className="w-full bg-black p-2 align-center content-center">
+                                                <div className="w-full p-2 align-center content-center bg-primary">
                                                     <Typography
                                                         variant="h5"
                                                         className="text-center p-1 text-white "
@@ -180,7 +180,7 @@ export default function MapPopUp({ openBottom, closeDrawerBottom, mapData }) {
                                         variant="h6"
                                         className="w-full mt-6 flex gap-2 px-3"
                                     >
-                                        <IdentificationIcon className="w-6 h-6" />
+                                        <IdentificationIcon className="w-6 h-6 text-primary" />
                                         Contact Information
                                     </Typography>
                                 </div>
@@ -221,7 +221,7 @@ export default function MapPopUp({ openBottom, closeDrawerBottom, mapData }) {
                                         variant="h6"
                                         className="w-full mt-5 flex gap-2 px-3"
                                     >
-                                        <BuildingOffice2Icon className="w-6 h-6" />
+                                        <BuildingOffice2Icon className="w-6 h-6 text-primary" />
                                         Status
                                     </Typography>
                                 </div>
