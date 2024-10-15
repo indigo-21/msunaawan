@@ -44,7 +44,7 @@ const MapContent = ({
                 weight={1}
                 pathOptions={{
                     color: "transparent",
-                    fillColor: "#999",
+                    fillColor: "#19196e",
                     fillOpacity: 1,
                 }}
                 positions={arrayOfCoordinates}
