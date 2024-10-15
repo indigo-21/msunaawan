@@ -61,7 +61,7 @@ export default function MapList({ onClickBuilding, mapData }) {
                 </div>
             </div>
             {locationList && (
-                <Card className="w-full bg-[#19196e] h-[810px] overflow-auto ">
+                <Card className="w-full bg-[#19196e] h-[80vh] overflow-auto ">
                     <List>
                         {locationList.map((location) => {
                             const locationId = location.__metadata.id;

@@ -93,7 +93,7 @@ export default function MapSidebarBurgerMenu({ onClickBuilding, mapData }) {
                     </div>
                 </div>
                 {locationList && (
-                    <Card className="w-full bg-gray-100">
+                    <Card className="w-full bg-[#19196e] h-[87vh]  overflow-auto ">
                         <List>
                             {locationList.map((location) => {
                                 const locationId = location.__metadata.id;
@@ -113,11 +113,13 @@ export default function MapSidebarBurgerMenu({ onClickBuilding, mapData }) {
                                                 arrayOfCoordinates,
                                             )
                                         }
+                                        className="hover:bg-secondary group"
                                     >
                                         <div>
                                             <Typography
                                                 variant="h6"
-                                                color="blue-gray"
+                                                // color="blue-gray"
+                                                className="text-[#fddd00] group-hover:text-primary"
                                             >
                                                 {location.Title}
                                             </Typography>
