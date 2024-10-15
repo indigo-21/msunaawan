@@ -110,7 +110,7 @@ export default function MapCustom() {
     return (
         <div className="flex flex-row">
             <section className="hidden lg:block lg:basis-1/5 bg-white">
-                <div className="container my-10">{contentMapList}</div>
+                <div className="container my-10 ">{contentMapList}</div>
             </section>
             <section className="lg:hidden block absolute z-[99999] pl-10">
                 <div className="container my-2">{contentBurgerMenu}</div>

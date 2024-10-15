@@ -43,7 +43,8 @@ const MapContent = ({
                 key={location.__metadata.id}
                 weight={1}
                 pathOptions={{
-                    color: "transparent",
+                    color: "#fddd00",
+                    weight: 3,
                     fillColor: "#19196e",
                     fillOpacity: 1,
                 }}

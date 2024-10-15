@@ -27,7 +27,7 @@ export default function MapList({ onClickBuilding, mapData }) {
 
     return (
         <>
-            <div className="w-full mb-5">
+            <div className="w-full mb-5 ">
                 <div className="relative flex items-center">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -61,7 +61,7 @@ export default function MapList({ onClickBuilding, mapData }) {
                 </div>
             </div>
             {locationList && (
-                <Card className="w-full bg-[#f6f6f6] h-[810px] overflow-auto">
+                <Card className="w-full bg-[#19196e] h-[810px] overflow-auto ">
                     <List>
                         {locationList.map((location) => {
                             const locationId = location.__metadata.id;
@@ -84,11 +84,12 @@ export default function MapList({ onClickBuilding, mapData }) {
                                             arrayOfCoordinates[0][1],
                                         ])
                                     }
+                                    className="hover:bg-secondary group"
                                 >
                                     <div>
                                         <Typography
                                             variant="h6"
-                                            color="blue-gray"
+                                            className="text-[#fddd00] group-hover:text-primary"
                                         >
                                             {location.Title}
                                         </Typography>
