@@ -1,11 +1,15 @@
 import { Icon } from "leaflet";
 import { Marker, Polygon, SVGOverlay, Tooltip } from "react-leaflet";
-import marker from "../../assets/marker.png";
+import marker from "../../assets/marker-icon.png";
+import markerShadowPng from "../../assets/marker-shadow.png";
 
 const myIcon = new Icon({
     iconUrl: marker,
-    iconSize: [42, 42],
-    iconAnchor: [10, 35],
+    shadowUrl: markerShadowPng,
+    iconSize: [25, 41], // Default size for Leaflet marker
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41],
 });
 
 const MapContent = ({
@@ -83,7 +87,7 @@ const MapContent = ({
                         {location.Title}
                     </text>
                 </svg> */}
-                <Marker position={mapMarker}></Marker>
+                <Marker position={mapMarker} icon={myIcon}></Marker>
             </Polygon>
         // </SVGOverlay>
     );
