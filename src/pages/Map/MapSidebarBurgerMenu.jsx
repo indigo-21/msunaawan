@@ -8,33 +8,42 @@ import {
     Card,
 } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { LOCATIONS } from "./MapCoords";
 
-export default function MapSidebarBurgerMenu({ onClickBuilding }) {
+export default function MapSidebarBurgerMenu({ onClickBuilding, mapData }) {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const search = useRef();
-    const [locationList, setLocationList] = useState(LOCATIONS);
+    const [locationList, setLocationList] = useState(mapData);
 
     const handleKeyDown = (event) => {
         if (event.keyCode === 8) {
-            setLocationList(LOCATIONS);
+            setLocationList(mapData);
+        } else {
+            setLocationList(
+                locationList.filter((location) =>
+                    location.Title
+                        .toLowerCase()
+                        .includes(search.current.value.toLowerCase()),
+                ),
+            );
         }
     };
 
-    const handleClick = () => {
-        setLocationList(
-            locationList.filter((location) =>
-                location.title
-                    .toLowerCase()
-                    .includes(search.current.value.toLowerCase()),
-            ),
-        );
-    };
+    // const handleClick = () => {
+    //     setLocationList(
+    //         locationList.filter((location) =>
+    //             location.Title.toLowerCase().includes(
+    //                 search.current.value.toLowerCase(),
+    //             ),
+    //         ),
+    //     );
+    // };
 
     const handleClickSidenav = (location) => {
         setIsDrawerOpen(false);
 
-        onClickBuilding([location.coords[0][0], location.coords[0][1]]);
+        console.log(location[0][0]);
+
+        onClickBuilding([location[0][0], location[0][1]]);
     };
 
     const openDrawer = () => setIsDrawerOpen(true);
@@ -74,24 +83,35 @@ export default function MapSidebarBurgerMenu({ onClickBuilding }) {
                             onKeyDown={(event) => handleKeyDown(event)}
                         />
 
-                        <button
+                        {/* <button
                             className="h-10 ml-1 text-white text-sm my-auto px-3 flex items-center bg-primary rounded hover:bg-[#1e1e85]"
                             type="button"
                             onClick={handleClick}
                         >
                             Search
-                        </button>
+                        </button> */}
                     </div>
                 </div>
-                <Card className="w-full bg-gray-100">
-                    {locationList.length > 0 && (
+                {locationList && (
+                    <Card className="w-full bg-gray-100">
                         <List>
-                            {locationList.map((location, key) => {
+                            {locationList.map((location) => {
+                                const locationId = location.__metadata.id;
+                                const arrayOfCoordinates =
+                                    location.Coordinates &&
+                                    location.Coordinates.split("\n").map(
+                                        (item) =>
+                                            item
+                                                .split(",")
+                                                .map((coord) => coord.trim()),
+                                    );
                                 return (
                                     <ListItem
-                                        key={key}
+                                        key={locationId}
                                         onClick={() =>
-                                            handleClickSidenav(location)
+                                            handleClickSidenav(
+                                                arrayOfCoordinates,
+                                            )
                                         }
                                     >
                                         <div>
@@ -99,15 +119,15 @@ export default function MapSidebarBurgerMenu({ onClickBuilding }) {
                                                 variant="h6"
                                                 color="blue-gray"
                                             >
-                                                {location.title}
+                                                {location.Title}
                                             </Typography>
                                         </div>
                                     </ListItem>
                                 );
                             })}
                         </List>
-                    )}
-                </Card>
+                    </Card>
+                )}
             </Drawer>
         </>
     );

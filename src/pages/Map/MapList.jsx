@@ -1,39 +1,29 @@
 import { List, ListItem, Card, Typography } from "@material-tailwind/react";
-import { LOCATIONS } from "./MapCoords";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-export default function MapList({ onClickBuilding }) {
+export default function MapList({ onClickBuilding, mapData }) {
     const search = useRef();
-    const [locationList, setLocationList] = useState(LOCATIONS);
+    const [locationList, setLocationList] = useState(mapData);
+
+    useEffect(() => {
+        setLocationList(mapData);
+    }, [mapData]);
 
     const handleKeyDown = (event) => {
         if (event.keyCode === 8) {
-            setLocationList(LOCATIONS);
+            setLocationList(mapData);
         } else {
             setLocationList(
                 locationList.filter((location) =>
-                    location.title
-                        .toLowerCase()
-                        .includes(search.current.value.toLowerCase()),
+                    location.Title.toLowerCase().includes(
+                        search.current.value.toLowerCase(),
+                    ),
                 ),
             );
         }
     };
 
-    // const handleClick = () => {
-    //     setLocationList(
-    //         locationList.filter((location) =>
-    //             location.title
-    //                 .toLowerCase()
-    //                 .includes(search.current.value.toLowerCase()),
-    //         ),
-
-    //     );
-    // };
-
-    // const handleClickList = (coordinates) => {
-    //     alert(coordinates);
-    // };
+    // console.log(locationList);
 
     return (
         <>
@@ -70,17 +60,28 @@ export default function MapList({ onClickBuilding }) {
                     </button> */}
                 </div>
             </div>
-            <Card className="w-full bg-gray-100">
-                {locationList.length > 0 && (
+            {locationList && (
+                <Card className="w-full bg-[#f6f6f6] h-[810px] overflow-auto">
                     <List>
-                        {locationList.map((location, key) => {
+                        {locationList.map((location) => {
+                            const locationId = location.__metadata.id;
+                            const arrayOfCoordinates =
+                                location.Coordinates &&
+                                location.Coordinates.split("\n").map((item) =>
+                                    item
+                                        .split(",")
+                                        .map((coord) => coord.trim()),
+                                );
+                            // console.log(
+                            //     arrayOfCoordinates && arrayOfCoordinates[0],
+                            // );
                             return (
                                 <ListItem
-                                    key={key}
+                                    key={locationId}
                                     onClick={() =>
                                         onClickBuilding([
-                                            location.coords[0][0],
-                                            location.coords[0][1],
+                                            arrayOfCoordinates[0][0],
+                                            arrayOfCoordinates[0][1],
                                         ])
                                     }
                                 >
@@ -89,15 +90,15 @@ export default function MapList({ onClickBuilding }) {
                                             variant="h6"
                                             color="blue-gray"
                                         >
-                                            {location.title}
+                                            {location.Title}
                                         </Typography>
                                     </div>
                                 </ListItem>
                             );
                         })}
                     </List>
-                )}
-            </Card>
+                </Card>
+            )}
         </>
     );
 }

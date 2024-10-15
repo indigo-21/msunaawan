@@ -11,21 +11,27 @@ import {
     Typography,
     IconButton,
     Button,
+    Spinner,
 } from "@material-tailwind/react";
 import CarouselComponent from "../../componenets/CarouselComponent";
 
-export default function MapPopUp({ openBottom, closeDrawerBottom, mapData }) {
-    const {
-        title,
-        image,
-        description,
-        coords,
-        contactInformation,
-        status,
-        event,
-    } = mapData;
+export default function MapPopUp({
+    openBottom,
+    closeDrawerBottom,
+    mapData,
+    image,
+    isImageLoading,
+}) {
+    const { Title, Description, Coordinates, Status } = mapData;
 
-    const locationCoords = `https://www.google.com/maps/dir/?api=1&destination=${coords[0][0]},${coords[0][1]}`;
+    const arrayOfCoordinates =
+        Coordinates &&
+        Coordinates.split("\n").map((item) =>
+            item.split(",").map((coord) => coord.trim()),
+        );
+
+    const locationCoords = `https://www.google.com/maps/dir/?api=1&destination=${arrayOfCoordinates[0][0]},${arrayOfCoordinates[0][1]}`;
+
     return (
         <Drawer
             placement="bottom"
@@ -62,12 +68,27 @@ export default function MapPopUp({ openBottom, closeDrawerBottom, mapData }) {
             </div>
             <div className="mb-6 flex overflow-auto lg:overflow-hidden h-full lg:p-0 p-10">
                 <div className="grid grid-cols-1 lg:grid-cols-3 grid-flow-row-dense gap-5 ">
-                    <div>
-                        <img
-                            src={image}
-                            alt={title}
-                            className="object-cover w-full h-full"
-                        />
+                    <div className="relative w-full h-full flex items-center justify-center">
+                        {isImageLoading ? (
+                            <div className="animate-pulse bg-gray-300 w-full h-full flex items-center justify-center">
+                                <Spinner className="h-12 w-12 " />
+                            </div>
+                        ) : image ? (
+                            <img
+                                src={image}
+                                alt={Title}
+                                className="object-cover w-full h-full"
+                            />
+                        ) : (
+                            <div className="w-full h-full flex items-center justify-center">
+                                <Typography
+                                    variant="small"
+                                    className="text-center"
+                                >
+                                    No Image Available
+                                </Typography>
+                            </div>
+                        )}
                     </div>
                     <div className="py-5 px-2">
                         <div className="mb-5">
@@ -76,14 +97,14 @@ export default function MapPopUp({ openBottom, closeDrawerBottom, mapData }) {
                                 color="blue-gray"
                                 className="mb-3"
                             >
-                                {title}
+                                {Title}
                             </Typography>
-                            <Typography variant="small">
-                                {description.length > 400
-                                    ? `${description.substring(0, 400)} ...`
-                                    : description}
+                            <Typography variant="small" className="mb-10">
+                                {Description.length > 600
+                                    ? `${Description.substring(0, 600)} ...`
+                                    : Description}
                             </Typography>
-                            <Typography variant="small" className="py-3">
+                            {/* <Typography variant="small" className="py-3">
                                 <a
                                     href="https://indigo21uk.sharepoint.com/sites/MSU-test9/SitePages/College-Marine-and-Allied-Sciences.aspx"
                                     target="_blank"
@@ -93,16 +114,16 @@ export default function MapPopUp({ openBottom, closeDrawerBottom, mapData }) {
                                         <ArrowTopRightOnSquareIcon className="h-4 w-4" />
                                     </label>
                                 </a>
-                            </Typography>
+                            </Typography> */}
                         </div>
-                        <div className="grid grid-cols-2 gap-4 ">
+                        <div className="grid grid-cols gap-4">
                             <a href={locationCoords} target="_blank">
                                 <Button className="flex gap-2 justify-center w-full bg-primary">
                                     <MapPinIcon className="h-4 w-4" />
                                     Navigate
                                 </Button>
                             </a>
-                            <a
+                            {/* <a
                                 href="https://indigo21uk.sharepoint.com/sites/MSU-test9/SitePages/College-Marine-and-Allied-Sciences.aspx"
                                 target="_blank"
                             >
@@ -110,184 +131,100 @@ export default function MapPopUp({ openBottom, closeDrawerBottom, mapData }) {
                                     <ArrowTopRightOnSquareIcon className="h-4 w-4" />
                                     View Page
                                 </Button>
-                            </a>
+                            </a> */}
                         </div>
                     </div>
-                    {event.length > 0 && (
-                        <div className="mr-5 h-[400px] overflow-auto">
-                            <div>
-                                <Typography
-                                    variant="h6"
-                                    className="w-full mt-6 flex gap-2 px-3"
-                                >
-                                    <CalendarDaysIcon className="w-6 h-6 text-primary" />
-                                    Event
-                                </Typography>
-                                <CarouselComponent>
-                                    {event.map((event, key) => {
-                                        return (
-                                            <section
-                                                className="border-solid border-gray border-2 "
-                                                key={key}
-                                            >
-                                                <div className="w-full p-2 align-center content-center bg-primary">
-                                                    <Typography
-                                                        variant="h5"
-                                                        className="text-center p-1 text-white "
-                                                    >
-                                                        {event.time}
-                                                    </Typography>
-                                                </div>
-                                                <div className="w-full">
-                                                    <div className="p-2">
-                                                        <Typography
-                                                            variant="h6"
-                                                            className="mt-1"
-                                                        >
-                                                            <a
-                                                                href={
-                                                                    event.link
-                                                                }
-                                                                target="_blank"
-                                                                className="!text-gray-900 hover:!text-gray-700"
-                                                            >
-                                                                {event.title
-                                                                    .length > 50
-                                                                    ? `${event.title.substring(
-                                                                          0,
-                                                                          50,
-                                                                      )} ...`
-                                                                    : event.title}
-                                                            </a>
-
-                                                            <div className="flex gap-1">
-                                                                <CalendarDateRangeIcon className="w-4 h-4 my-auto" />
-                                                                <Typography variant="small">
-                                                                    {event.date}
-                                                                </Typography>
-                                                            </div>
-                                                        </Typography>
-                                                    </div>
-                                                </div>
-                                            </section>
-                                        );
-                                    })}
-                                </CarouselComponent>
-                            </div>
-                            <div className="w-full pr-5">
-                                <div className="flex">
-                                    <Typography
-                                        variant="h6"
-                                        className="w-full mt-6 flex gap-2 px-3"
-                                    >
-                                        <IdentificationIcon className="w-6 h-6 text-primary" />
-                                        Contact Information
-                                    </Typography>
-                                </div>
-                                <div className="border-4 my-3">
-                                    <div className="grid px-3">
-                                        <Typography
-                                            variant="h6"
-                                            className="mt-1 mb-3"
-                                        >
-                                            Contact Number:
-                                        </Typography>
-                                        <Typography
-                                            variant="small"
-                                            className="!-mt-3"
-                                        >
-                                            {contactInformation.phone}
-                                        </Typography>
-                                    </div>
-
-                                    <div className="grid px-3">
-                                        <Typography
-                                            variant="h6"
-                                            className="mt-1 mb-3"
-                                        >
-                                            Email:
-                                        </Typography>
-                                        <Typography
-                                            variant="small"
-                                            className="!-mt-3 mb-3"
-                                        >
-                                            {contactInformation.email}
-                                        </Typography>
-                                    </div>
-                                </div>
-
-                                <div className="flex">
-                                    <Typography
-                                        variant="h6"
-                                        className="w-full mt-5 flex gap-2 px-3"
-                                    >
-                                        <BuildingOffice2Icon className="w-6 h-6 text-primary" />
-                                        Status
-                                    </Typography>
-                                </div>
-                                <div className="border-4 my-3">
-                                    <div className="grid px-3">
-                                        <Typography
-                                            variant="h6"
-                                            className="mt-1 mb-3"
-                                        >
-                                            {status}
-                                        </Typography>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    )}
-                    {/* <div className="w-full pr-5">
-                        <div className="flex">
+                    <div className="mr-5 h-[400px] overflow-auto">
+                        <div>
                             <Typography
                                 variant="h6"
                                 className="w-full mt-6 flex gap-2 px-3"
                             >
-                                <IdentificationIcon className="w-6 h-6" />
-                                Contact Information
+                                <CalendarDaysIcon className="w-6 h-6 text-primary" />
+                                Event
                             </Typography>
+                            <section className="border-solid border-gray border-4 mt-3">
+                                <div className="w-full">
+                                    <div className="p-2">
+                                        <Typography
+                                            variant="h6"
+                                            className="mt-1"
+                                        >
+                                            <a
+                                                href="#"
+                                                target="_blank"
+                                                className="!text-gray-900 hover:!text-gray-700"
+                                            >
+                                                No Event 
+                                            </a>
+                                        </Typography>
+                                    </div>
+                                </div>
+                            </section>
                         </div>
-                        <div className="border-4 my-3">
-                            <div className="grid px-3">
-                                <Typography variant="h6" className="mt-1 mb-3">
-                                    Contact Number:
-                                </Typography>
-                                <Typography variant="small" className="!-mt-3">
-                                    {contactInformation.phone}
-                                </Typography>
-                            </div>
-
-                            <div className="grid px-3">
-                                <Typography variant="h6" className="mt-1 mb-3">
-                                    Email:
-                                </Typography>
+                        <div className="w-full pr-5">
+                            <div className="flex">
                                 <Typography
-                                    variant="small"
-                                    className="!-mt-3 mb-3"
+                                    variant="h6"
+                                    className="w-full mt-6 flex gap-2 px-3"
                                 >
-                                    {contactInformation.email}
+                                    <IdentificationIcon className="w-6 h-6 text-primary" />
+                                    Contact Information
                                 </Typography>
                             </div>
-                        </div>
+                            <div className="border-4 my-3">
+                                <div className="grid px-3">
+                                    <Typography
+                                        variant="h6"
+                                        className="mt-1 mb-3"
+                                    >
+                                        Contact Number:
+                                    </Typography>
+                                    <Typography
+                                        variant="small"
+                                        className="!-mt-3"
+                                    >
+                                        Phone Number:
+                                    </Typography>
+                                </div>
 
-                        <div className="flex">
-                            <Typography
-                                variant="h6"
-                                className="w-full mt-5 flex gap-2 px-3"
-                            >
-                                <BuildingOffice2Icon className="w-6 h-6" />
-                                Status
-                            </Typography>
-                        </div>
-                        <div className="border-4 my-3">
-                            <div className="grid px-3">
-                                <Typography variant="h6" className="mt-1 mb-3">
-                                    {status}
+                                <div className="grid px-3">
+                                    <Typography
+                                        variant="h6"
+                                        className="mt-1 mb-3"
+                                    >
+                                        Email:
+                                    </Typography>
+                                    <Typography
+                                        variant="small"
+                                        className="!-mt-3 mb-3"
+                                    >
+                                        EMail:
+                                    </Typography>
+                                </div>
+                            </div>
+
+                            <div className="flex">
+                                <Typography
+                                    variant="h6"
+                                    className="w-full mt-5 flex gap-2 px-3"
+                                >
+                                    <BuildingOffice2Icon className="w-6 h-6 text-primary" />
+                                    Status
                                 </Typography>
                             </div>
+                            <div className="border-4 my-3">
+                                <div className="grid px-3">
+                                    <Typography
+                                        variant="h6"
+                                        className="mt-1 mb-3"
+                                    >
+                                        {Status}
+                                    </Typography>
+                                </div>
+                            </div>
                         </div>
-                    </div> */}
+                    </div>
                 </div>
             </div>
         </Drawer>
