@@ -113,13 +113,13 @@ export default function MapSidebarBurgerMenu({ onClickBuilding, mapData }) {
                                                 arrayOfCoordinates,
                                             )
                                         }
-                                        className="hover:bg-secondary group"
+                                        className="hover:bg-secondary active:bg-secondary group"
                                     >
                                         <div>
                                             <Typography
                                                 variant="h6"
                                                 // color="blue-gray"
-                                                className="text-[#fddd00] group-hover:text-primary"
+                                                className="text-[#fddd00] group-hover:text-primary group-active:text-primary"
                                             >
                                                 {location.Title}
                                             </Typography>

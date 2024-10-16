@@ -84,12 +84,12 @@ export default function MapList({ onClickBuilding, mapData }) {
                                             arrayOfCoordinates[0][1],
                                         ])
                                     }
-                                    className="hover:bg-secondary group"
+                                    className="hover:bg-secondary active:bg-secondary focus:bg-secondary group"
                                 >
                                     <div>
                                         <Typography
                                             variant="h6"
-                                            className="text-[#fddd00] group-hover:text-primary"
+                                            className="text-[#fddd00] group-hover:text-primary group-active:text-primary group-focus:text-primary"
                                         >
                                             {location.Title}
                                         </Typography>

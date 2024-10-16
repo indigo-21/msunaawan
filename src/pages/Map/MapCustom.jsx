@@ -15,7 +15,7 @@ export default function MapCustom() {
     const { data: mapLists, isLoading } = useQuery({
         queryKey: ["mapData"],
         queryFn: fetchMapLists,
-        refetchInterval: 5000,
+        // refetchInterval: 5000,
     });
 
     const [mapMarker, setMapMarker] = useState([0, 0]);
