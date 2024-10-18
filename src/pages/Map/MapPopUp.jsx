@@ -184,7 +184,7 @@ export default function MapPopUp({
                                     </Typography>
                                     <Typography
                                         variant="small"
-                                        className="!-mt-3"
+                                        className="!-mt-3 "
                                     >
                                         {ContactNumber ? ContactNumber : 'No Contact Number available'}
                                     </Typography>
@@ -199,7 +199,7 @@ export default function MapPopUp({
                                     </Typography>
                                     <Typography
                                         variant="small"
-                                        className="!-mt-3 mb-3"
+                                        className="!-mt-3 mb-3 break-all text-sm md:text-base"
                                     >
                                         {EmailAddress ? EmailAddress : 'No Email Address available'}
                                     </Typography>
