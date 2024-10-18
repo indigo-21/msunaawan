@@ -5,6 +5,7 @@ export default function MapList({ onClickBuilding, mapData }) {
     const search = useRef();
     const [locationList, setLocationList] = useState(mapData);
 
+
     useEffect(() => {
         setLocationList(mapData);
     }, [mapData]);

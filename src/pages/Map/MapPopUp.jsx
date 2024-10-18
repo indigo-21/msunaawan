@@ -22,7 +22,9 @@ export default function MapPopUp({
     image,
     isImageLoading,
 }) {
-    const { Title, Description, Coordinates, Status } = mapData;
+    const { Title, Description, Coordinates, Status, ContactNumber, EmailAddress } = mapData;
+
+    console.log(ContactNumber);
 
     const arrayOfCoordinates =
         Coordinates &&
@@ -184,7 +186,7 @@ export default function MapPopUp({
                                         variant="small"
                                         className="!-mt-3"
                                     >
-                                        Phone Number:
+                                        {ContactNumber ? ContactNumber : 'No Contact Number available'}
                                     </Typography>
                                 </div>
 
@@ -199,7 +201,7 @@ export default function MapPopUp({
                                         variant="small"
                                         className="!-mt-3 mb-3"
                                     >
-                                        EMail:
+                                        {EmailAddress ? EmailAddress : 'No Email Address available'}
                                     </Typography>
                                 </div>
                             </div>
