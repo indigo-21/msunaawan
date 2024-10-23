@@ -47,10 +47,10 @@ export default function MapPopUp({
     // if (image && typeof image === "string" && image.includes("blob:")) {
     //     imageUrl = image; // The image is a Blob URL
     // }
-    const handleError = useEffect(() => {
-        // Set a fallback image when the main image fails to load
-        setImgSrc(`${image}`); // Replace with your fallback image path
-    }, [image]);
+    // const handleError = useEffect(() => {
+    //     // Set a fallback image when the main image fails to load
+    //     setImgSrc(`${image}`); // Replace with your fallback image path
+    // }, [image]);
 
     return (
         <Drawer
@@ -98,7 +98,7 @@ export default function MapPopUp({
                                 src={imgSrc}
                                 alt={Title}
                                 className="object-cover w-full h-full"
-                                onError={handleError}
+                                // onError={handleError}
                             />
                         ) : (
                             <div className="w-full h-full flex items-center justify-center">
