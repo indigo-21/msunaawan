@@ -13,6 +13,7 @@ import {
     Button,
     Spinner,
 } from "@material-tailwind/react";
+import { useEffect, useState } from "react";
 
 export default function MapPopUp({
     openBottom,
@@ -29,6 +30,9 @@ export default function MapPopUp({
         ContactNumber,
         EmailAddress,
     } = mapData;
+    const [imgSrc, setImgSrc] = useState(
+        `${import.meta.env.VITE_MAIN_URL}${image}`,
+    );
 
     const arrayOfCoordinates =
         Coordinates &&
@@ -38,13 +42,15 @@ export default function MapPopUp({
 
     const locationCoords = `https://www.google.com/maps/dir/?api=1&destination=${arrayOfCoordinates[0][0]},${arrayOfCoordinates[0][1]}`;
 
-    let imageUrl;
+    // let imageUrl = `${import.meta.env.VITE_MAIN_URL}${image}`;
 
-    if (image && typeof image === "string" && image.includes("blob:")) {
-        imageUrl = image; // The image is a Blob URL
-    } else {
-        imageUrl = `${import.meta.env.VITE_MAIN_URL}${image}`; // Construct the URL using your environment variable
-    }
+    // if (image && typeof image === "string" && image.includes("blob:")) {
+    //     imageUrl = image; // The image is a Blob URL
+    // }
+    const handleError = useEffect(() => {
+        // Set a fallback image when the main image fails to load
+        setImgSrc(`${image}`); // Replace with your fallback image path
+    }, [image]);
 
     return (
         <Drawer
@@ -89,9 +95,10 @@ export default function MapPopUp({
                             </div>
                         ) : image ? (
                             <img
-                                src={imageUrl}
+                                src={imgSrc}
                                 alt={Title}
                                 className="object-cover w-full h-full"
+                                onError={handleError}
                             />
                         ) : (
                             <div className="w-full h-full flex items-center justify-center">
@@ -157,6 +164,58 @@ export default function MapPopUp({
                                 <CalendarDaysIcon className="w-6 h-6 text-primary" />
                                 Event
                             </Typography>
+
+                            {/* <CarouselComponent>
+                                    {event.map((event, key) => {
+                                        return (
+                                            <section
+                                                className="border-solid border-gray border-2 "
+                                                key={key}
+                                            >
+                                                <div className="w-full p-2 align-center content-center bg-primary">
+                                                    <Typography
+                                                        variant="h5"
+                                                        className="text-center p-1 text-white "
+                                                    >
+                                                        {event.time}
+                                                    </Typography>
+                                                </div>
+                                                <div className="w-full">
+                                                    <div className="p-2">
+                                                        <Typography
+                                                            variant="h6"
+                                                            className="mt-1"
+                                                        >
+                                                            <a
+                                                                href={
+                                                                    event.link
+                                                                }
+                                                                target="_blank"
+                                                                className="!text-gray-900 hover:!text-gray-700"
+                                                            >
+                                                                {event.title
+                                                                    .length > 50
+                                                                    ? `${event.title.substring(
+                                                                          0,
+                                                                          50,
+                                                                      )} ...`
+                                                                    : event.title}
+                                                            </a>
+
+                                                            <div className="flex gap-1">
+                                                                <CalendarDateRangeIcon className="w-4 h-4 my-auto" />
+                                                                <Typography variant="small">
+                                                                    {event.date}
+                                                                </Typography>
+                                                            </div>
+                                                        </Typography>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        );
+                                    })}
+                                </CarouselComponent> */}
+
                             <section className="border-solid border-gray border-4 mt-3">
                                 <div className="w-full">
                                     <div className="p-2">
