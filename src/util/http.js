@@ -31,21 +31,37 @@ export const fetchMapLists = async () => {
 // };
 
 export const fetchMapImage = async (mapId) => {
-    const response = await fetch(import.meta.env.VITE_URL_FETCH + '/api/getImageFromDrive', {
-        method: 'POST',  
-        headers: {
-            'Content-Type': 'application/json',  
-        },
-        body: JSON.stringify({
-            id: mapId,  
-        }),
-    });
 
-    if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+    const filename = `/images/mapImages/${mapId}.jpg`;
+
+    const url = `${import.meta.env.VITE_MAIN_URL}${filename}`; // Construct the full URL
+
+    try {
+        const response = await fetch(url);
+        const contentType = response.headers.get("Content-Type");
+        // Here we check the status code to determine if the file exists
+        if (response.ok && contentType && contentType.startsWith("image/")) {
+            return filename;
+        } else {
+            const response = await fetch(import.meta.env.VITE_URL_FETCH + '/api/getImageFromDrive', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    id: mapId,
+                }),
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const mapImage = await response.blob();
+
+            return URL.createObjectURL(mapImage);
+        }
+    } catch (error) {
+        console.error('Error checking image:', error);
     }
-
-    const mapImage = await response.blob(); 
-
-    return URL.createObjectURL(mapImage); 
 };

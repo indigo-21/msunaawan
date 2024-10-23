@@ -22,9 +22,8 @@ export default function MapPopUp({
     image,
     isImageLoading,
 }) {
-    const { Title, Description, Coordinates, Status, ContactNumber, EmailAddress } = mapData;
 
-    console.log(ContactNumber);
+    const { Title, Description, Coordinates, Status, ContactNumber, EmailAddress } = mapData;
 
     const arrayOfCoordinates =
         Coordinates &&
