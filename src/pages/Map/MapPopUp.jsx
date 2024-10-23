@@ -13,7 +13,6 @@ import {
     Button,
     Spinner,
 } from "@material-tailwind/react";
-import CarouselComponent from "../../componenets/CarouselComponent";
 
 export default function MapPopUp({
     openBottom,
@@ -22,8 +21,14 @@ export default function MapPopUp({
     image,
     isImageLoading,
 }) {
-
-    const { Title, Description, Coordinates, Status, ContactNumber, EmailAddress } = mapData;
+    const {
+        Title,
+        Description,
+        Coordinates,
+        Status,
+        ContactNumber,
+        EmailAddress,
+    } = mapData;
 
     const arrayOfCoordinates =
         Coordinates &&
@@ -32,6 +37,14 @@ export default function MapPopUp({
         );
 
     const locationCoords = `https://www.google.com/maps/dir/?api=1&destination=${arrayOfCoordinates[0][0]},${arrayOfCoordinates[0][1]}`;
+
+    let imageUrl;
+
+    if (image && typeof image === "string" && image.includes("blob:")) {
+        imageUrl = image; // The image is a Blob URL
+    } else {
+        imageUrl = `${import.meta.env.VITE_MAIN_URL}${image}`; // Construct the URL using your environment variable
+    }
 
     return (
         <Drawer
@@ -76,7 +89,7 @@ export default function MapPopUp({
                             </div>
                         ) : image ? (
                             <img
-                                src={image}
+                                src={imageUrl}
                                 alt={Title}
                                 className="object-cover w-full h-full"
                             />
@@ -156,7 +169,7 @@ export default function MapPopUp({
                                                 target="_blank"
                                                 className="!text-gray-900 hover:!text-gray-700"
                                             >
-                                                No Event 
+                                                No Event
                                             </a>
                                         </Typography>
                                     </div>
@@ -185,7 +198,9 @@ export default function MapPopUp({
                                         variant="small"
                                         className="!-mt-3 "
                                     >
-                                        {ContactNumber ? ContactNumber : 'No Contact Number available'}
+                                        {ContactNumber
+                                            ? ContactNumber
+                                            : "No Contact Number available"}
                                     </Typography>
                                 </div>
 
@@ -200,7 +215,9 @@ export default function MapPopUp({
                                         variant="small"
                                         className="!-mt-3 mb-3 break-all text-sm md:text-base"
                                     >
-                                        {EmailAddress ? EmailAddress : 'No Email Address available'}
+                                        {EmailAddress
+                                            ? EmailAddress
+                                            : "No Email Address available"}
                                     </Typography>
                                 </div>
                             </div>
