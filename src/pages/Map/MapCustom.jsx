@@ -24,6 +24,7 @@ export default function MapCustom() {
     const [mapData, setMapData] = useState({});
     const [shouldCenterMap, setShouldCenterMap] = useState(false);
 
+
     const { data: buildingImage, isLoading: isImageLoading } = useQuery({
         queryKey: ["imageData", mapData.Pictures?.Description],
         queryFn: () => {

@@ -32,7 +32,7 @@ export const fetchMapLists = async () => {
 
 export const fetchMapImage = async (mapId) => {
 
-    const filename = `/images/mapImages/${mapId}.jpg`;
+    const filename = `/images/mapImages/${mapId}`;
 
     const url = `${import.meta.env.VITE_MAIN_URL}${filename}`; // Construct the full URL
 
@@ -43,7 +43,7 @@ export const fetchMapImage = async (mapId) => {
         if (response.ok && contentType && contentType.startsWith("image/")) {
             return filename;
         } else {
-            const response = await fetch(import.meta.env.VITE_URL_FETCH + '/api/getImageFromDrive', {
+            const response = await fetch(import.meta.env.VITE_URL_FETCH + '/api/getImageFromSharepoint', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
