@@ -1,10 +1,10 @@
 import { List, ListItem, Card, Typography } from "@material-tailwind/react";
 import { useEffect, useRef, useState } from "react";
+import { Coordinates } from "../../helpers/locationCenter";
 
 export default function MapList({ onClickBuilding, mapData }) {
     const search = useRef();
     const [locationList, setLocationList] = useState(mapData);
-
 
     useEffect(() => {
         setLocationList(mapData);
@@ -66,6 +66,8 @@ export default function MapList({ onClickBuilding, mapData }) {
                     <List>
                         {locationList.map((location) => {
                             const locationId = location.__metadata.id;
+
+
                             const arrayOfCoordinates =
                                 location.Coordinates &&
                                 location.Coordinates.split("\n").map((item) =>
@@ -73,6 +75,8 @@ export default function MapList({ onClickBuilding, mapData }) {
                                         .split(",")
                                         .map((coord) => coord.trim()),
                                 );
+
+                            const coordinates = Coordinates(arrayOfCoordinates);
                             // console.log(
                             //     arrayOfCoordinates && arrayOfCoordinates[0],
                             // );
@@ -80,10 +84,7 @@ export default function MapList({ onClickBuilding, mapData }) {
                                 <ListItem
                                     key={locationId}
                                     onClick={() =>
-                                        onClickBuilding([
-                                            arrayOfCoordinates[0][0],
-                                            arrayOfCoordinates[0][1],
-                                        ])
+                                        onClickBuilding(coordinates)
                                     }
                                     className="hover:bg-secondary active:bg-secondary focus:bg-secondary group"
                                 >

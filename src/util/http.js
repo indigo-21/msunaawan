@@ -1,6 +1,16 @@
-export const fetchMapLists = async () => {
+export const fetchMapLists = async (map) => {
 
-    const response = await fetch(import.meta.env.VITE_URL_FETCH + '/api/getMapLists');
+
+    const response = await fetch(import.meta.env.VITE_URL_FETCH + '/api/getMapLists', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            baseUrl: map.baseUrl,
+            queryParams: map.queryParams,
+        }),
+    });
 
     if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -30,7 +40,7 @@ export const fetchMapLists = async () => {
 
 // };
 
-export const fetchMapImage = async (mapId) => {
+export const fetchMapImage = async (mapId, imagePath) => {
 
     const filename = `/images/mapImages/${mapId}`;
 
@@ -50,6 +60,7 @@ export const fetchMapImage = async (mapId) => {
                 },
                 body: JSON.stringify({
                     id: mapId,
+                    imagePath: imagePath
                 }),
             });
 

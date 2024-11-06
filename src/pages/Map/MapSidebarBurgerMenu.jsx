@@ -8,6 +8,7 @@ import {
     Card,
 } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Coordinates } from "../../helpers/locationCenter";
 
 export default function MapSidebarBurgerMenu({ onClickBuilding, mapData }) {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -20,9 +21,9 @@ export default function MapSidebarBurgerMenu({ onClickBuilding, mapData }) {
         } else {
             setLocationList(
                 locationList.filter((location) =>
-                    location.Title
-                        .toLowerCase()
-                        .includes(search.current.value.toLowerCase()),
+                    location.Title.toLowerCase().includes(
+                        search.current.value.toLowerCase(),
+                    ),
                 ),
             );
         }
@@ -41,9 +42,9 @@ export default function MapSidebarBurgerMenu({ onClickBuilding, mapData }) {
     const handleClickSidenav = (location) => {
         setIsDrawerOpen(false);
 
-        console.log(location[0][0]);
+        const coordinates = Coordinates(location);
 
-        onClickBuilding([location[0][0], location[0][1]]);
+        onClickBuilding(coordinates);
     };
 
     const openDrawer = () => setIsDrawerOpen(true);

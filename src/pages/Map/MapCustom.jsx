@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { MapContainer, TileLayer, useMap } from "react-leaflet";
-import { MSU_COORDS } from "./MapCoords";
 import MapList from "./MapList";
 import "./MapStyle.css";
 import "leaflet/dist/leaflet.css";
@@ -11,19 +10,18 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchMapImage, fetchMapLists } from "../../util/http";
 import { Spinner, Typography } from "@material-tailwind/react";
 
-export default function MapCustom() {
-    const { data: mapLists, isLoading } = useQuery({
-        queryKey: ["mapData"],
-        queryFn: fetchMapLists,
-        // refetchInterval: 5000,
-    });
-
+export default function MapCustom({ mapUri, center, naawanImagePath }) {
     const [mapMarker, setMapMarker] = useState([0, 0]);
-    const [mapCenter, setMapCenter] = useState(MSU_COORDS);
+    const [mapCenter, setMapCenter] = useState(center);
     const [openBottom, setOpenBottom] = useState(false);
     const [mapData, setMapData] = useState({});
     const [shouldCenterMap, setShouldCenterMap] = useState(false);
 
+    const { data: mapLists, isLoading } = useQuery({
+        queryKey: ["mapData"],
+        queryFn: () => fetchMapLists(mapUri),
+        // refetchInterval: 5000,
+    });
 
     const { data: buildingImage, isLoading: isImageLoading } = useQuery({
         queryKey: ["imageData", mapData.Pictures?.Description],
@@ -31,7 +29,7 @@ export default function MapCustom() {
             if (!mapData.Pictures?.Description) {
                 throw new Error("No map ID provided");
             }
-            return fetchMapImage(mapData.Pictures.Description);
+            return fetchMapImage(mapData.Pictures.Description, naawanImagePath);
         },
         cacheTime: 30000 * 60,
         enabled: !!mapData.Pictures?.Description,
@@ -113,7 +111,7 @@ export default function MapCustom() {
             <section className="hidden lg:block lg:basis-1/5 bg-white">
                 <div className="container my-10 ">{contentMapList}</div>
             </section>
-            <section className="lg:hidden block absolute z-[99999] pl-10">
+            <section className="lg:hidden block absolute z-[99999] ml-12">
                 <div className="container my-2">{contentBurgerMenu}</div>
             </section>
             <section className="basis-full lg:basis-4/5">
@@ -124,10 +122,10 @@ export default function MapCustom() {
                     maxZoom={18}
                     scrollWheelZoom={false}
                     maxBounds={[
-                        [8.434802869839737, 124.28369871374886],
-                        [8.434961993869162, 124.2982470280324],
-                        [8.422639145464208, 124.29687038909907],
-                        [8.422726537656104, 124.28087574318215],
+                        [8.434, 124.283],
+                        [8.434, 124.298],
+                        [8.412, 124.310],
+                        [8.416, 124.269],
                     ]}
                 >
                     {shouldCenterMap && <MapClickHandler record={mapCenter} />}
