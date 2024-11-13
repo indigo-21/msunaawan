@@ -19,6 +19,7 @@ const MapContent = ({
     mapMarker,
     setOpenBottom,
     handleClick,
+    colorScheme
 }) => {
     // console.log(mapMarker);
 
@@ -40,9 +41,9 @@ const MapContent = ({
             key={location.__metadata.id}
             weight={1}
             pathOptions={{
-                color: "#fddd00",
+                color: colorScheme.color,
                 weight: 3,
-                fillColor: "#19196e",
+                fillColor: colorScheme.fillColor,
                 fillOpacity: 1,
             }}
             positions={arrayOfCoordinates}

@@ -20,6 +20,11 @@ const BOUNDS = [
     [8.416, 124.269],
 ];
 
+const COLORSCHEME = {
+    color: '#fddd00',
+    fillColor: '#19196e',
+};
+
 const MsunMap = () => {
     return (
         <MapCustom
@@ -27,6 +32,7 @@ const MsunMap = () => {
             center={MSU_COORDS}
             naawanImagePath={naawanImagePath}
             bounds={BOUNDS}
+            colorScheme={COLORSCHEME}
         />
     );
 };

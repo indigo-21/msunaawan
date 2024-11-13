@@ -10,7 +10,13 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchMapImage, fetchMapLists } from "../../util/http";
 import { Spinner, Typography } from "@material-tailwind/react";
 
-export default function MapCustom({ mapUri, center, naawanImagePath, bounds }) {
+export default function MapCustom({
+    mapUri,
+    center,
+    naawanImagePath,
+    bounds,
+    colorScheme,
+}) {
     const [mapMarker, setMapMarker] = useState([0, 0]);
     const [mapCenter, setMapCenter] = useState(center);
     const [openBottom, setOpenBottom] = useState(false);
@@ -86,12 +92,17 @@ export default function MapCustom({ mapUri, center, naawanImagePath, bounds }) {
         );
     } else if (mapLists) {
         contentMapList = (
-            <MapList onClickBuilding={handleClick} mapData={mapLists} />
+            <MapList
+                onClickBuilding={handleClick}
+                mapData={mapLists}
+                colorScheme={colorScheme}
+            />
         );
         contentBurgerMenu = (
             <MapSidebarBurgerMenu
                 onClickBuilding={handleClick}
                 mapData={mapLists}
+                colorScheme={colorScheme}
             />
         );
         mapContent = mapLists.map((location) => (
@@ -102,6 +113,7 @@ export default function MapCustom({ mapUri, center, naawanImagePath, bounds }) {
                 mapMarker={mapMarker}
                 setOpenBottom={setOpenBottom}
                 handleClick={handleClick}
+                colorScheme={colorScheme}
             />
         ));
     }

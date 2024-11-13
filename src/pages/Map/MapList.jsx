@@ -2,7 +2,7 @@ import { List, ListItem, Card, Typography } from "@material-tailwind/react";
 import { useEffect, useRef, useState } from "react";
 import { Coordinates } from "../../helpers/locationCenter";
 
-export default function MapList({ onClickBuilding, mapData }) {
+export default function MapList({ onClickBuilding, mapData, colorScheme }) {
     const search = useRef();
     const [locationList, setLocationList] = useState(mapData);
 
@@ -62,7 +62,7 @@ export default function MapList({ onClickBuilding, mapData }) {
                 </div>
             </div>
             {locationList && (
-                <Card className="w-full bg-[#19196e] h-[80vh] overflow-auto ">
+                <Card className="w-full h-[80vh] overflow-auto " style={{ backgroundColor: colorScheme.fillColor }}>
                     <List>
                         {locationList.map((location) => {
                             const locationId = location.__metadata.id;
@@ -91,7 +91,8 @@ export default function MapList({ onClickBuilding, mapData }) {
                                     <div>
                                         <Typography
                                             variant="h6"
-                                            className="text-[#fddd00] group-hover:text-primary group-active:text-primary group-focus:text-primary"
+                                            className=" group-hover:text-primary group-active:text-primary group-focus:text-primary"
+                                            style={{ color: colorScheme.color }}
                                         >
                                             {location.Title}
                                         </Typography>
