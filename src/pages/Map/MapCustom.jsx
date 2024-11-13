@@ -10,7 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchMapImage, fetchMapLists } from "../../util/http";
 import { Spinner, Typography } from "@material-tailwind/react";
 
-export default function MapCustom({ mapUri, center, naawanImagePath }) {
+export default function MapCustom({ mapUri, center, naawanImagePath, bounds }) {
     const [mapMarker, setMapMarker] = useState([0, 0]);
     const [mapCenter, setMapCenter] = useState(center);
     const [openBottom, setOpenBottom] = useState(false);
@@ -121,12 +121,7 @@ export default function MapCustom({ mapUri, center, naawanImagePath }) {
                     minZoom={16}
                     maxZoom={18}
                     scrollWheelZoom={false}
-                    maxBounds={[
-                        [8.434, 124.283],
-                        [8.434, 124.298],
-                        [8.412, 124.310],
-                        [8.416, 124.269],
-                    ]}
+                    maxBounds={bounds}
                 >
                     {shouldCenterMap && <MapClickHandler record={mapCenter} />}
                     <TileLayer

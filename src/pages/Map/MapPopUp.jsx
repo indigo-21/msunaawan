@@ -85,11 +85,11 @@ export default function MapPopUp({
                     </IconButton>
                 </div>
             </div>
-            <div className="mb-6 flex overflow-auto lg:overflow-hidden h-full lg:p-0 p-10">
+            <div className="mb-6  overflow-auto lg:overflow-hidden h-full lg:p-0 p-10">
                 <div className="lg:flex lg:flex-row gap-5 ">
-                    <div className="lg:basis-2/3 ">
-                        <div className="grid lg:grid-cols-2 sm:grid-cols-1 md:grid-cols-2 grid-flow-row-dense gap-5 ">
-                            <div className="relative w-full lg:w-full h-full flex items-center justify-center">
+                    <div className="lg:basis-2/3">
+                        <div className="grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 grid-flow-row-dense gap-5 h-full">
+                            <div className="relative w-full h-full flex items-center justify-center">
                                 {isImageLoading ? (
                                     <div className="animate-pulse bg-gray-300 w-full h-full flex items-center justify-center">
                                         <Spinner className="h-12 w-12 " />
@@ -125,7 +125,8 @@ export default function MapPopUp({
                                         variant="small"
                                         className="mb-5"
                                     >
-                                        {Description.length > 600
+                                        {Description || 'No Description Available'}
+                                        {Description && Description.length > 600
                                             ? `${Description.substring(
                                                   0,
                                                   600,
