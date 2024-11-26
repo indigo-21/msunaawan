@@ -85,94 +85,83 @@ export default function MapPopUp({
                     </IconButton>
                 </div>
             </div>
-            <div className="mb-6  overflow-auto lg:overflow-hidden h-full lg:p-0 p-10">
-                <div className="lg:flex lg:flex-row gap-5 ">
-                    <div className="lg:basis-2/3">
-                        <div className="grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 grid-flow-row-dense gap-5 h-full">
+            <div className="overflow-auto h-full lg:p-0 p-20">
+                <div className="lg:flex lg:flex-row md:flex-row md:flex gap-5 ">
+                    <div className="lg:basis-auto md:basis-1/2 sm:basis-full">
+                        <div className="grid grid-flow-col auto-cols-auto">
                             <div className="relative w-full h-full flex items-center justify-center">
                                 {isImageLoading ? (
                                     <div className="animate-pulse bg-gray-300 w-full h-full flex items-center justify-center">
                                         <Spinner className="h-12 w-12 " />
                                     </div>
-                                ) : image ? (
-                                    <img
-                                        src={imgSrc}
-                                        alt={Title}
-                                        className="object-cover w-full h-full"
-                                        onError={handleError}
-                                    />
                                 ) : (
-                                    <div className="w-full h-full flex items-center justify-center">
-                                        <Typography
-                                            variant="small"
-                                            className="text-center"
-                                        >
-                                            No Image Available
-                                        </Typography>
-                                    </div>
+                                    image && (
+                                        <img
+                                            src={imgSrc}
+                                            alt={Title}
+                                            className="object-cover w-screen h-[400px] object-center"
+                                            onError={handleError}
+                                        />
+                                    )
                                 )}
                             </div>
-                            <div className="py-5 px-2">
-                                <div className="mb-5">
-                                    <Typography
-                                        variant="h4"
-                                        color="blue-gray"
-                                        className="mb-3"
-                                    >
-                                        {Title}
-                                    </Typography>
+                        </div>
+                    </div>
+                    <div className="lg:basis-auto md:basis-1/2 sm:basis-full">
+                        <div className="py-5 px-2">
+                            <div className="mb-5">
+                                <Typography
+                                    variant="h4"
+                                    color="blue-gray"
+                                    className="mb-3"
+                                >
+                                    {Title}
+                                </Typography>
+                                <Typography variant="small" className="mb-5">
+                                    {Description && Description.length > 600
+                                        ? `${Description.substring(0, 600)} ...`
+                                        : Description}
+                                </Typography>
+
+                                {ContactNumber && (
                                     <Typography
                                         variant="small"
-                                        className="mb-5"
+                                        className="mb-1 flex gap-3"
                                     >
-                                        {Description || 'No Description Available'}
-                                        {Description && Description.length > 600
-                                            ? `${Description.substring(
-                                                  0,
-                                                  600,
-                                              )} ...`
-                                            : Description}
+                                        <PhoneIcon className="h-5 w-5" />
+                                        {ContactNumber}
                                     </Typography>
+                                )}
 
-                                    {ContactNumber && (
-                                        <Typography
-                                            variant="small"
-                                            className="mb-1 flex gap-3"
+                                {EmailAddress && (
+                                    <Typography
+                                        variant="small"
+                                        className="mb-5 flex gap-3"
+                                    >
+                                        <EnvelopeIcon className="h-5 w-5" />
+                                        {EmailAddress}
+                                    </Typography>
+                                )}
+                                {/* <Typography variant="small" className="py-3">
+                                        <a
+                                            href="https://indigo21uk.sharepoint.com/sites/MSU-test9/SitePages/College-Marine-and-Allied-Sciences.aspx"
+                                            target="_blank"
                                         >
-                                            <PhoneIcon className="h-5 w-5" />
-                                            {ContactNumber}
-                                        </Typography>
-                                    )}
-
-                                    {EmailAddress && (
-                                        <Typography
-                                            variant="small"
-                                            className="mb-5 flex gap-3"
-                                        >
-                                            <EnvelopeIcon className="h-5 w-5" />
-                                            {EmailAddress}
-                                        </Typography>
-                                    )}
-                                    {/* <Typography variant="small" className="py-3">
-                                <a
-                                    href="https://indigo21uk.sharepoint.com/sites/MSU-test9/SitePages/College-Marine-and-Allied-Sciences.aspx"
-                                    target="_blank"
-                                >
-                                    <label className="flex gap-1 w-auto cursor-pointer">
-                                        Read More
-                                        <ArrowTopRightOnSquareIcon className="h-4 w-4" />
-                                    </label>
+                                            <label className="flex gap-1 w-auto cursor-pointer">
+                                                Read More
+                                                <ArrowTopRightOnSquareIcon className="h-4 w-4" />
+                                            </label>
+                                        </a>
+                                    </Typography> */}
+                            </div>
+                            <div className="grid grid-cols gap-4">
+                                <a href={locationCoords} target="_blank">
+                                    <Button className="flex gap-2 justify-center w-full bg-primary">
+                                        <MapPinIcon className="h-4 w-4" />
+                                        Navigate
+                                    </Button>
                                 </a>
-                            </Typography> */}
-                                </div>
-                                <div className="grid grid-cols gap-4">
-                                    <a href={locationCoords} target="_blank">
-                                        <Button className="flex gap-2 justify-center w-full bg-primary">
-                                            <MapPinIcon className="h-4 w-4" />
-                                            Navigate
-                                        </Button>
-                                    </a>
-                                    {/* <a
+                                {/* <a
                                 href="https://indigo21uk.sharepoint.com/sites/MSU-test9/SitePages/College-Marine-and-Allied-Sciences.aspx"
                                 target="_blank"
                             >
@@ -181,110 +170,66 @@ export default function MapPopUp({
                                     View Page
                                 </Button>
                             </a> */}
-                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="lg:basis-1/3  md:pb-16">
-                        <div className="grid grid-cols-2 lg:grid-cols-1 gap-10">
-                            <div className="w-full pr-5">
-                                <Typography
-                                    variant="h6"
-                                    className="w-full mt-6 flex gap-2 px-3"
-                                >
-                                    <CalendarDaysIcon className="w-6 h-6 text-primary" />
-                                    Event
-                                </Typography>
 
-                                {/* <CarouselComponent>
-                                    {event.map((event, key) => {
-                                        return (
-                                            <section
-                                                className="border-solid border-gray border-2 "
-                                                key={key}
+                        {Status === "Renovated" ||
+                            (Status === "Under Construction" && (
+                                <div className="w-full pr-5">
+                                    <div className="flex">
+                                        <Typography
+                                            variant="h6"
+                                            className="w-full mt-6 flex gap-2 px-3"
+                                        >
+                                            <BuildingOffice2Icon className="w-6 h-6 text-primary" />
+                                            Status
+                                        </Typography>
+                                    </div>
+                                    <section className="border-solid border-gray border-4 mt-3">
+                                        <div className="w-full">
+                                            <div className="p-2">
+                                                <Typography
+                                                    variant="h6"
+                                                    className="mt-1"
+                                                >
+                                                    {Status}
+                                                </Typography>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                            ))}
+                    </div>
+                    {/* <div className="lg:basis-auto md:basis-1/2 sm:basis-full">
+                        <div className="grid grid-cols-2 lg:grid-cols-1 gap-10">
+                            {Status === "Renovated" ||
+                                (Status === "Under Construction" && (
+                                    <div className="w-full pr-5">
+                                        <div className="flex">
+                                            <Typography
+                                                variant="h6"
+                                                className="w-full mt-6 flex gap-2 px-3"
                                             >
-                                                <div className="w-full p-2 align-center content-center bg-primary">
+                                                <BuildingOffice2Icon className="w-6 h-6 text-primary" />
+                                                Status
+                                            </Typography>
+                                        </div>
+                                        <section className="border-solid border-gray border-4 mt-3">
+                                            <div className="w-full">
+                                                <div className="p-2">
                                                     <Typography
-                                                        variant="h5"
-                                                        className="text-center p-1 text-white "
+                                                        variant="h6"
+                                                        className="mt-1"
                                                     >
-                                                        {event.time}
+                                                        {Status}
                                                     </Typography>
                                                 </div>
-                                                <div className="w-full">
-                                                    <div className="p-2">
-                                                        <Typography
-                                                            variant="h6"
-                                                            className="mt-1"
-                                                        >
-                                                            <a
-                                                                href={
-                                                                    event.link
-                                                                }
-                                                                target="_blank"
-                                                                className="!text-gray-900 hover:!text-gray-700"
-                                                            >
-                                                                {event.title
-                                                                    .length > 50
-                                                                    ? `${event.title.substring(
-                                                                          0,
-                                                                          50,
-                                                                      )} ...`
-                                                                    : event.title}
-                                                            </a>
-
-                                                            <div className="flex gap-1">
-                                                                <CalendarDateRangeIcon className="w-4 h-4 my-auto" />
-                                                                <Typography variant="small">
-                                                                    {event.date}
-                                                                </Typography>
-                                                            </div>
-                                                        </Typography>
-                                                    </div>
-                                                </div>
-                                            </section>
-                                        );
-                                    })}
-                                </CarouselComponent> */}
-
-                                <section className="border-solid border-gray border-4 mt-3">
-                                    <div className="w-full">
-                                        <div className="p-2">
-                                            <Typography
-                                                variant="h6"
-                                                className="mt-1"
-                                            >
-                                                No Event
-                                            </Typography>
-                                        </div>
+                                            </div>
+                                        </section>
                                     </div>
-                                </section>
-                            </div>
-                            <div className="w-full pr-5">
-                                <div className="flex">
-                                    <Typography
-                                        variant="h6"
-                                        className="w-full mt-6 flex gap-2 px-3"
-                                    >
-                                        <BuildingOffice2Icon className="w-6 h-6 text-primary" />
-                                        Status
-                                    </Typography>
-                                </div>
-                                <section className="border-solid border-gray border-4 mt-3">
-                                    <div className="w-full">
-                                        <div className="p-2">
-                                            <Typography
-                                                variant="h6"
-                                                className="mt-1"
-                                            >
-                                                {Status}
-                                            </Typography>
-                                        </div>
-                                    </div>
-                                </section>
-                            </div>
+                                ))}
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </Drawer>
