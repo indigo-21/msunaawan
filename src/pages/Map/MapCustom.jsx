@@ -16,6 +16,7 @@ export default function MapCustom({
     naawanImagePath,
     bounds,
     colorScheme,
+    zoom
 }) {
     const [mapMarker, setMapMarker] = useState([0, 0]);
     const [mapCenter, setMapCenter] = useState(center);
@@ -129,9 +130,9 @@ export default function MapCustom({
             <section className="basis-full lg:basis-4/5">
                 <MapContainer
                     center={mapCenter}
-                    zoom={18}
-                    minZoom={16}
-                    maxZoom={18}
+                    zoom={zoom.defaultZoom}
+                    minZoom={zoom.minZoom}
+                    maxZoom={zoom.maxZoom}
                     scrollWheelZoom={false}
                     maxBounds={bounds}
                 >

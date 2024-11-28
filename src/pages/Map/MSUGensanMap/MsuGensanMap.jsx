@@ -21,8 +21,14 @@ const BOUNDS = [
 ];
 
 const COLORSCHEME = {
-    color: '#fddd00',
-    fillColor: '#54090A',
+    color: "#fddd00",
+    fillColor: "#54090A",
+};
+
+const ZOOM = {
+    defaultZoom: 17,
+    minZoom: 16,
+    maxZoom: 18,
 };
 
 const MsuGensanMap = () => {
@@ -33,6 +39,7 @@ const MsuGensanMap = () => {
             naawanImagePath={naawanImagePath}
             bounds={BOUNDS}
             colorScheme={COLORSCHEME}
+            zoom={ZOOM}
         />
     );
 };
