@@ -1,7 +1,7 @@
 export const fetchMapLists = async (map) => {
 
 
-    const response = await fetch(import.meta.env.VITE_URL_FETCH + '/api/getMapLists', {
+    const response = await fetch(import.meta.env.VITE_URL_FETCH + '/api/getData', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
