@@ -2,14 +2,15 @@ import MapCustom from "../MapCustom";
 
 const naawanMap = {
     baseUrl:
-        "https://msuatnaawan.sharepoint.com/_api/web/lists/GetByTitle('MSUGensanBuildings')/items",
+        "https://msugensan2.sharepoint.com/sites/msugensan/_api/web/lists/GetByTitle('MSUGensanBuildings')/items",
     queryParams: {
         select: "Title,Latitude,Longitude,Description,Pictures,Status,Coordinates,ContactNumber,EmailAddress,is_deleted",
         filter: "is_deleted eq 0",
     },
 };
 
-const naawanImagePath = "/Shared Documents/MSUNaawan Building Images/";
+const naawanImagePath = "/sites/msugensan/Shared Documents/MSUGensan Building Images/";
+
 
 const MSU_COORDS = [6.066016293947272, 125.12658209653665];
 
