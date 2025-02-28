@@ -9,20 +9,26 @@ import MapContent from "./MapContent";
 import { useQuery } from "@tanstack/react-query";
 import { fetchMapImage, fetchMapLists } from "../../util/http";
 import { Spinner, Typography } from "@material-tailwind/react";
+import RoutingMachine from "./RoutineMachine";
 
 export default function MapCustom({
     mapUri,
     center,
     naawanImagePath,
-    bounds,
+    // bounds,
     colorScheme,
-    zoom
+    zoom,
 }) {
     const [mapMarker, setMapMarker] = useState([0, 0]);
     const [mapCenter, setMapCenter] = useState(center);
     const [openBottom, setOpenBottom] = useState(false);
     const [mapData, setMapData] = useState({});
     const [shouldCenterMap, setShouldCenterMap] = useState(false);
+    const [route, setRoute] = useState({
+        isActive: false,
+        start: [14.634811020040877, 121.04153151836833],
+        end: [8.42860495274196, 124.287636195666],
+    });
 
     const { data: mapLists, isLoading } = useQuery({
         queryKey: ["mapData"],
@@ -131,10 +137,10 @@ export default function MapCustom({
                 <MapContainer
                     center={mapCenter}
                     zoom={zoom.defaultZoom}
-                    minZoom={zoom.minZoom}
-                    maxZoom={zoom.maxZoom}
+                    // minZoom={zoom.minZoom}
+                    // maxZoom={zoom.maxZoom}
                     scrollWheelZoom={false}
-                    maxBounds={bounds}
+                    // maxBounds={bounds}
                 >
                     {shouldCenterMap && <MapClickHandler record={mapCenter} />}
                     <TileLayer
@@ -142,6 +148,13 @@ export default function MapCustom({
                         url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
                     />
                     {mapContent}
+                    {route.isActive && (
+                        <RoutingMachine
+                            key={`${route.start}-${route.end}`}
+                            start={route.start}
+                            end={route.end}
+                        />
+                    )}
                 </MapContainer>
             </section>
 
@@ -152,6 +165,8 @@ export default function MapCustom({
                     mapData={mapData}
                     image={buildingImage}
                     isImageLoading={isImageLoading}
+                    setRoute={setRoute}
+                    route={route}
                 />
             )}
         </div>

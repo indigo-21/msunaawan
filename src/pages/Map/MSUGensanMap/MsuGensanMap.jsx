@@ -1,6 +1,7 @@
 import MapCustom from "../MapCustom";
 
 const naawanMap = {
+    tenantName: "GENSAN",
     baseUrl:
         "https://msugensan2.sharepoint.com/sites/msugensan/_api/web/lists/GetByTitle('MSUGensanBuildings')/items",
     queryParams: {

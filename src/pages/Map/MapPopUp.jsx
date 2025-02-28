@@ -1,6 +1,5 @@
 import {
     BuildingOffice2Icon,
-    CalendarDaysIcon,
     EnvelopeIcon,
     MapPinIcon,
     PhoneIcon,
@@ -13,6 +12,7 @@ import {
     Spinner,
 } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
+import { Coordinates as MapCenter } from "../../helpers/locationCenter";
 
 export default function MapPopUp({
     openBottom,
@@ -20,6 +20,8 @@ export default function MapPopUp({
     mapData,
     image,
     isImageLoading,
+    setRoute,
+    route
 }) {
     const {
         Title,
@@ -32,6 +34,7 @@ export default function MapPopUp({
     const [imgSrc, setImgSrc] = useState(
         `${import.meta.env.VITE_MAIN_URL}${image}`,
     );
+    const [isFetchingLocation, setIsFetchingLocation] = useState(false);
 
     const arrayOfCoordinates =
         Coordinates &&
@@ -39,7 +42,9 @@ export default function MapPopUp({
             item.split(",").map((coord) => coord.trim()),
         );
 
-    const locationCoords = `https://www.google.com/maps/dir/?api=1&destination=${arrayOfCoordinates[0][0]},${arrayOfCoordinates[0][1]}`;
+    const locationCenter = MapCenter(arrayOfCoordinates);
+
+    // const locationCoords = `https://www.google.com/maps/dir/?api=1&destination=${arrayOfCoordinates[0][0]},${arrayOfCoordinates[0][1]}`;
 
     // let imageUrl = `${import.meta.env.VITE_MAIN_URL}${image}`;
 
@@ -50,6 +55,54 @@ export default function MapPopUp({
         // Set a fallback image when the main image fails to load
         setImgSrc(`${image}`); // Replace with your fallback image path
     }, [image]);
+
+    const handleNavigate = () => {
+        setIsFetchingLocation(true);
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    setIsFetchingLocation(false);
+                    const { latitude, longitude } = position.coords;
+                    setRoute({
+                        isActive: true,
+                        start: [latitude, longitude],
+                        end: [locationCenter[0], locationCenter[1]],
+                    });
+                },
+                (error) => {
+                    setIsFetchingLocation(false);
+                    console.error("Error getting current location:", error);
+                    // Handle error case here if needed
+                },
+            );
+        } else {
+            setIsFetchingLocation(false);
+            console.log("Geolocation not supported");
+        }
+        // navigator.geolocation.getCurrentPosition(
+        //     (position) => {
+        //         const { latitude, longitude } = position.coords;
+        //         console.log(latitude, longitude);
+        //         setRoute({
+        //             isActive: true,
+        //             start: [latitude, longitude],
+        //             end: [arrayOfCoordinates[0][0], arrayOfCoordinates[0][1]],
+        //         });
+        //     },
+        //     (error) => {
+        //         console.error("Error getting current location:", error);
+        //         // Handle error case here if needed
+        //     },
+        // );
+    };
+
+    const handleStopNavigation = () => {
+        setRoute({
+            isActive: false,
+            start: [],
+            end: [],
+        });
+    };
 
     return (
         <Drawer
@@ -154,13 +207,30 @@ export default function MapPopUp({
                                         </a>
                                     </Typography> */}
                             </div>
-                            <div className="grid grid-cols gap-4">
-                                <a href={locationCoords} target="_blank">
-                                    <Button className="flex gap-2 justify-center w-full bg-primary">
+                            <div className="flex gap-4">
+                                {/* <a href={locationCoords} target="_blank"> */}
+                                <Button
+                                    className="flex gap-2 justify-center w-full bg-primary"
+                                    onClick={handleNavigate}
+                                    disabled={isFetchingLocation}
+                                >
+                                    {isFetchingLocation ? (
+                                        <Spinner className="h-4 w-4" />
+                                    ) : (
                                         <MapPinIcon className="h-4 w-4" />
-                                        Navigate
-                                    </Button>
-                                </a>
+                                    )}
+                                    {isFetchingLocation
+                                        ? "Fetching Location..."
+                                        : "Navigate"}
+                                </Button>
+                                <Button
+                                    className="flex gap-2 justify-center w-full bg-red-500"
+                                    onClick={handleStopNavigation}
+                                    disabled={!route.isActive}
+                                >
+                                    Stop Navigation
+                                </Button>
+                                {/* </a> */}
                                 {/* <a
                                 href="https://indigo21uk.sharepoint.com/sites/MSU-test9/SitePages/College-Marine-and-Allied-Sciences.aspx"
                                 target="_blank"

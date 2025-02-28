@@ -7,6 +7,7 @@ export const fetchMapLists = async (map) => {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+            tenantName: map.tenantName,
             baseUrl: map.baseUrl,
             queryParams: map.queryParams,
         }),
