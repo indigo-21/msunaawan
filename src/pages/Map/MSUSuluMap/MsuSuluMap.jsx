@@ -1,18 +1,18 @@
-import MapCustom from "../Map/MapCustom";
+import MapCustom from "../MapCustom";
 
-const naawanMap = {
-    tenantName: "NAAWAN",
+const gensanMap = {
+    tenantName: "SULU",
     baseUrl:
-        "https://msuatnaawan.sharepoint.com/_api/web/lists/GetByTitle('MSUNaawanBuildings')/items",
+        "https://msusulu1974.sharepoint.com/_api/web/lists/GetByTitle('MSUSuluBuildings')/items",
     queryParams: {
         select: "Title,Latitude,Longitude,Description,Pictures,Status,Coordinates,ContactNumber,EmailAddress,is_deleted",
         filter: "is_deleted eq 0",
     },
 };
 
-const naawanImagePath = "/Shared Documents/MSUNaawan Building Images/";
+const gensanImagePath = "/Shared Documents/MSUGensan Building Images/";
 
-const MSU_COORDS = [8.428618869777717, 124.28762800990076];
+const MSU_COORDS = [6.047120060229939, 121.01551857257319];
 
 const BOUNDS = [
     [8.434, 124.283],
@@ -32,12 +32,12 @@ const ZOOM = {
     maxZoom: 18,
 };
 
-const MsunMap = () => {
+const MsuSuluMap = () => {
     return (
         <MapCustom
-            mapUri={naawanMap}
+            mapUri={gensanMap}
             center={MSU_COORDS}
-            naawanImagePath={naawanImagePath}
+            naawanImagePath={gensanImagePath}
             bounds={BOUNDS}
             colorScheme={COLORSCHEME}
             zoom={ZOOM}
@@ -45,4 +45,4 @@ const MsunMap = () => {
     );
 };
 
-export default MsunMap;
+export default MsuSuluMap;
