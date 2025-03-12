@@ -10,7 +10,7 @@ const gensanMap = {
     },
 };
 
-const gensanImagePath = "/Shared Documents/MSUGensan Building Images/";
+const gensanImagePath = "/Shared Documents/MSUSulu Building Images/";
 
 const MSU_COORDS = [6.047120060229939, 121.01551857257319];
 
@@ -22,8 +22,8 @@ const BOUNDS = [
 ];
 
 const COLORSCHEME = {
-    color: "#fddd00",
-    fillColor: "#19196e",
+    color: "#fff",
+    fillColor: "#aa090b",
 };
 
 const ZOOM = {
