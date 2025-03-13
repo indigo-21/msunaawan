@@ -4,6 +4,7 @@
 import MsuGensanMap from "../pages/Map/MSUGensanMap/MsuGensanMap";
 import MsunMap from "../pages/Map/MSUNaawanMap/MsunMap";
 import MsuSuluMap from "../pages/Map/MSUSuluMap/MsuSuluMap";
+import MsuTawiMap from "../pages/Map/MSUTawiMap/MSUTawiMap";
 // import MapCustom2 from "../pages/Map/MapCustom-backup-new";
 
 const AppRoutes = [
@@ -14,6 +15,7 @@ const AppRoutes = [
     { path: "/msunaawan", element: <MsunMap /> },
     { path: "/msugensan", element: <MsuGensanMap /> },
     { path: "/msusulu", element: <MsuSuluMap /> },
+    { path: "/msutawi", element: <MsuTawiMap /> },
 ];
 
 export default AppRoutes;
