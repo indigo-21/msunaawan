@@ -3,14 +3,14 @@ import MapCustom from "../MapCustom";
 const tawiMap = {
     tenantName: "TCTO",
     baseUrl:
-        "https://msutawitawiedu.sharepoint.com/_api/web/lists/GetByTitle('MSUTawiBuildings')/items",
+        "https://msutawitawiedu.sharepoint.com/sites/Tawitawi/_api/web/lists/GetByTitle('MSUTawiTawiBuildings')/items",
     queryParams: {
         select: "Title,Latitude,Longitude,Description,Pictures,Status,Coordinates,ContactNumber,EmailAddress,is_deleted",
         filter: "is_deleted eq 0",
     },
 };
 
-const tawiImagePath = "/Shared Documents/MSUTawi Building Images/";
+const tawiImagePath = "/sites/Tawitawi/Shared Documents/MSUTawi Building Images/";
 
 const MSU_COORDS = [5.038618853176858, 119.743778270813];
 
