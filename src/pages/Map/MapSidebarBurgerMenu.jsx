@@ -10,7 +10,11 @@ import {
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Coordinates } from "../../helpers/locationCenter";
 
-export default function MapSidebarBurgerMenu({ onClickBuilding, mapData }) {
+export default function MapSidebarBurgerMenu({
+    onClickBuilding,
+    mapData,
+    colorScheme,
+}) {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const search = useRef();
     const [locationList, setLocationList] = useState(mapData);
@@ -79,7 +83,7 @@ export default function MapSidebarBurgerMenu({ onClickBuilding, mapData }) {
 
                         <input
                             className="w-full pl-10 h-10 pr-3 py-2 bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md"
-                            placeholder="MSU Naawan Buildings ..."
+                            placeholder="MSU Buildings ..."
                             ref={search}
                             onKeyDown={(event) => handleKeyDown(event)}
                         />
@@ -94,7 +98,10 @@ export default function MapSidebarBurgerMenu({ onClickBuilding, mapData }) {
                     </div>
                 </div>
                 {locationList && (
-                    <Card className="w-full bg-[#19196e] h-[87vh]  overflow-auto ">
+                    <Card
+                        className="w-full h-[87vh]  overflow-auto "
+                        style={{ backgroundColor: colorScheme.fillColor }}
+                    >
                         <List>
                             {locationList.map((location) => {
                                 const locationId = location.__metadata.id;
@@ -120,7 +127,10 @@ export default function MapSidebarBurgerMenu({ onClickBuilding, mapData }) {
                                             <Typography
                                                 variant="h6"
                                                 // color="blue-gray"
-                                                className="text-[#fddd00] group-hover:text-primary group-active:text-primary"
+                                                className=" group-hover:text-primary group-active:text-primary"
+                                                style={{
+                                                    color: colorScheme.color,
+                                                }}
                                             >
                                                 {location.Title}
                                             </Typography>

@@ -21,7 +21,7 @@ const MapContent = ({
     handleClick,
     colorScheme
 }) => {
-    // console.log(mapMarker);
+    // console.info(location);
 
     const arrayOfCoordinates =
         location.Coordinates &&
@@ -34,16 +34,16 @@ const MapContent = ({
     }
 
     const coordinates = Coordinates(arrayOfCoordinates);
-
+    // console.log(location.secondary);
     return (
         <Polygon
             id={location.__metadata.id}
             key={location.__metadata.id}
             weight={1}
             pathOptions={{
-                color: colorScheme.color,
+                color: location.Primary ?? colorScheme.color,
                 weight: 3,
-                fillColor: colorScheme.fillColor,
+                fillColor: location.Secondary ?? colorScheme.fillColor,
                 fillOpacity: 1,
             }}
             positions={arrayOfCoordinates}

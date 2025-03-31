@@ -1,12 +1,14 @@
 import MapCustom from "../MapCustom";
 
+const dateNow = new Date().toISOString();
+
 const tawiMap = {
     tenantName: "TCTO",
     baseUrl:
         "https://msutawitawiedu.sharepoint.com/sites/Tawitawi/_api/web/lists/GetByTitle('MSUTawiTawiBuildings')/items",
     queryParams: {
-        select: "Title,Latitude,Longitude,Description,Pictures,Status,Coordinates,ContactNumber,EmailAddress,is_deleted",
-        filter: "is_deleted eq 0",
+        select: "",
+        filter: `(is_deleted eq 0) and (expires_at ge datetime'${dateNow}' or expires_at eq null)`,
     },
 };
 

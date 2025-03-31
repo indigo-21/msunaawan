@@ -1,5 +1,6 @@
 import {
     BuildingOffice2Icon,
+    // CalendarDateRangeIcon,
     EnvelopeIcon,
     MapPinIcon,
     PhoneIcon,
@@ -13,6 +14,7 @@ import {
 } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { Coordinates as MapCenter } from "../../helpers/locationCenter";
+// import CarouselComponent from "../../componenets/CarouselComponent";
 
 export default function MapPopUp({
     openBottom,
@@ -21,7 +23,7 @@ export default function MapPopUp({
     image,
     isImageLoading,
     setRoute,
-    route
+    route,
 }) {
     const {
         Title,
@@ -95,6 +97,15 @@ export default function MapPopUp({
         //     },
         // );
     };
+
+    const TruncatedDescription = ({ description }) => {
+        return (
+          <div
+            className="mb-5"
+            dangerouslySetInnerHTML={{ __html: description }}
+          />
+        );
+      };
 
     const handleStopNavigation = () => {
         setRoute({
@@ -170,11 +181,7 @@ export default function MapPopUp({
                                 >
                                     {Title}
                                 </Typography>
-                                <Typography variant="small" className="mb-5">
-                                    {Description && Description.length > 600
-                                        ? `${Description.substring(0, 600)} ...`
-                                        : Description}
-                                </Typography>
+                                <TruncatedDescription description={Description} />
 
                                 {ContactNumber && (
                                     <Typography
@@ -269,37 +276,121 @@ export default function MapPopUp({
                                     </section>
                                 </div>
                             ))}
-                    </div>
-                    {/* <div className="lg:basis-auto md:basis-1/2 sm:basis-full">
-                        <div className="grid grid-cols-2 lg:grid-cols-1 gap-10">
-                            {Status === "Renovated" ||
-                                (Status === "Under Construction" && (
-                                    <div className="w-full pr-5">
-                                        <div className="flex">
-                                            <Typography
-                                                variant="h6"
-                                                className="w-full mt-6 flex gap-2 px-3"
+
+                        {/* <CarouselComponent>
+                            <section className="border-solid border-gray border-2 ">
+                                <div className="w-full p-2 align-center content-center bg-primary">
+                                    <Typography
+                                        variant="h5"
+                                        className="text-center p-1 text-white "
+                                    >
+                                        09:00 AM
+                                    </Typography>
+                                </div>
+                                <div className="w-full">
+                                    <div className="p-2">
+                                        <Typography
+                                            variant="h6"
+                                            className="mt-1"
+                                        >
+                                            <a
+                                                href=""
+                                                target="_blank"
+                                                className="!text-gray-900 hover:!text-gray-700"
                                             >
-                                                <BuildingOffice2Icon className="w-6 h-6 text-primary" />
-                                                Status
+                                                test
+                                            </a>
+
+                                            <div className="flex gap-1">
+                                                <CalendarDateRangeIcon className="w-4 h-4 my-auto" />
+                                                <Typography variant="small">
+                                                    2024-09-01
+                                                </Typography>
+                                            </div>
+                                        </Typography>
+                                    </div>
+                                </div>
+                            </section>
+                            <section className="border-solid border-gray border-2 ">
+                                <div className="w-full p-2 align-center content-center bg-primary">
+                                    <Typography
+                                        variant="h5"
+                                        className="text-center p-1 text-white "
+                                    >
+                                        09:00 AM
+                                    </Typography>
+                                </div>
+                                <div className="w-full">
+                                    <div className="p-2">
+                                        <Typography
+                                            variant="h6"
+                                            className="mt-1"
+                                        >
+                                            <a
+                                                href=""
+                                                target="_blank"
+                                                className="!text-gray-900 hover:!text-gray-700"
+                                            >
+                                                test
+                                            </a>
+
+                                            <div className="flex gap-1">
+                                                <CalendarDateRangeIcon className="w-4 h-4 my-auto" />
+                                                <Typography variant="small">
+                                                    2024-09-01
+                                                </Typography>
+                                            </div>
+                                        </Typography>
+                                    </div>
+                                </div>
+                            </section>
+                            {event.map((event, key) => {
+                                return (
+                                    <section
+                                        className="border-solid border-gray border-2 "
+                                        key={key}
+                                    >
+                                        <div className="w-full p-2 align-center content-center bg-primary">
+                                            <Typography
+                                                variant="h5"
+                                                className="text-center p-1 text-white "
+                                            >
+                                                {event.time}
                                             </Typography>
                                         </div>
-                                        <section className="border-solid border-gray border-4 mt-3">
-                                            <div className="w-full">
-                                                <div className="p-2">
-                                                    <Typography
-                                                        variant="h6"
-                                                        className="mt-1"
+                                        <div className="w-full">
+                                            <div className="p-2">
+                                                <Typography
+                                                    variant="h6"
+                                                    className="mt-1"
+                                                >
+                                                    <a
+                                                        href={event.link}
+                                                        target="_blank"
+                                                        className="!text-gray-900 hover:!text-gray-700"
                                                     >
-                                                        {Status}
-                                                    </Typography>
-                                                </div>
+                                                        {event.title.length > 50
+                                                            ? `${event.title.substring(
+                                                                  0,
+                                                                  50,
+                                                              )} ...`
+                                                            : event.title}
+                                                    </a>
+
+                                                    <div className="flex gap-1">
+                                                        <CalendarDateRangeIcon className="w-4 h-4 my-auto" />
+                                                        <Typography variant="small">
+                                                            {event.date}
+                                                        </Typography>
+                                                    </div>
+                                                </Typography>
                                             </div>
-                                        </section>
-                                    </div>
-                                ))}
-                        </div>
-                    </div> */}
+                                        </div>
+                                    </section>
+                                );
+                            })}
+                        </CarouselComponent> */}
+                    </div>
                 </div>
             </div>
         </Drawer>
