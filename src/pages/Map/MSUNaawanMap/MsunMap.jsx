@@ -1,7 +1,10 @@
 import MapCustom from "../MapCustom";
-
+const tenantName = "NAAWAN";
+const imagePath = "/Shared Documents/MSUNaawan Building Images/";
+const baseUrl = "https://msuatnaawan.sharepoint.com/";
+const folderName = "MSUNaawan Building Images";
 const naawanMap = {
-    tenantName: "NAAWAN",
+    tenantName: tenantName,
     baseUrl:
         "https://msuatnaawan.sharepoint.com/_api/web/lists/GetByTitle('MSUNaawanBuildings')/items",
     queryParams: {
@@ -10,7 +13,6 @@ const naawanMap = {
     },
 };
 
-const naawanImagePath = "/Shared Documents/MSUNaawan Building Images/";
 
 const MSU_COORDS = [8.428618869777717, 124.28762800990076];
 
@@ -37,10 +39,13 @@ const MsunMap = () => {
         <MapCustom
             mapUri={naawanMap}
             center={MSU_COORDS}
-            naawanImagePath={naawanImagePath}
+            imagePath={imagePath}
             bounds={BOUNDS}
             colorScheme={COLORSCHEME}
             zoom={ZOOM}
+            tenantName={tenantName}
+            folderName={folderName}
+            baseUrl={baseUrl}
         />
     );
 };

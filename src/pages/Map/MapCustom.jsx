@@ -14,10 +14,13 @@ import RoutingMachine from "./RoutineMachine";
 export default function MapCustom({
     mapUri,
     center,
-    naawanImagePath,
+    imagePath,
     // bounds,
     colorScheme,
     zoom,
+    tenantName,
+    folderName,
+    baseUrl,
 }) {
     const [mapMarker, setMapMarker] = useState([0, 0]);
     const [mapCenter, setMapCenter] = useState(center);
@@ -42,7 +45,13 @@ export default function MapCustom({
             if (!mapData.Pictures?.Description) {
                 throw new Error("No map ID provided");
             }
-            return fetchMapImage(mapData.Pictures.Description, naawanImagePath);
+            return fetchMapImage(
+                tenantName,
+                folderName,
+                mapData.Pictures.Description,
+                imagePath,
+                baseUrl,
+            );
         },
         cacheTime: 30000 * 60,
         enabled: !!mapData.Pictures?.Description,

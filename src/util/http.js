@@ -41,7 +41,7 @@ export const fetchMapLists = async (map) => {
 
 // };
 
-export const fetchMapImage = async (mapId, imagePath) => {
+export const fetchMapImage = async (tenaneName, folderName, mapId, imagePath, baseUrl) => {
 
     const filename = `/images/mapImages/${mapId}`;
 
@@ -60,8 +60,11 @@ export const fetchMapImage = async (mapId, imagePath) => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
+                    tenantName: tenaneName,
+                    folderName: folderName,
                     id: mapId,
-                    imagePath: imagePath
+                    imagePath: imagePath,
+                    baseUrl: baseUrl,
                 }),
             });
 

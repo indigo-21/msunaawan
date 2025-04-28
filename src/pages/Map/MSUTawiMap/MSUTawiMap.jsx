@@ -1,9 +1,12 @@
 import MapCustom from "../MapCustom";
 
 const dateNow = new Date().toISOString();
-
+const tenantName = "TCTO";
+const imagePath = "/sites/Tawitawi/Shared Documents/MSUTawi Building Images/";
+const baseUrl = "https://msutawitawiedu.sharepoint.com/sites/Tawitawi/";
+const folderName = "MSUTawi Building Images";
 const tawiMap = {
-    tenantName: "TCTO",
+    tenantName: tenantName,
     baseUrl:
         "https://msutawitawiedu.sharepoint.com/sites/Tawitawi/_api/web/lists/GetByTitle('MSUTawiTawiBuildings')/items",
     queryParams: {
@@ -11,8 +14,6 @@ const tawiMap = {
         filter: `(is_deleted eq 0) and (expires_at ge datetime'${dateNow}' or expires_at eq null)`,
     },
 };
-
-const tawiImagePath = "/sites/Tawitawi/Shared Documents/MSUTawi Building Images/";
 
 const MSU_COORDS = [5.038618853176858, 119.743778270813];
 
@@ -39,10 +40,13 @@ const MsuTawiMap = () => {
         <MapCustom
             mapUri={tawiMap}
             center={MSU_COORDS}
-            naawanImagePath={tawiImagePath}
+            imagePath={imagePath}
             bounds={BOUNDS}
             colorScheme={COLORSCHEME}
             zoom={ZOOM}
+            tenantName={tenantName}
+            folderName={folderName}
+            baseUrl={baseUrl}
         />
     );
 };

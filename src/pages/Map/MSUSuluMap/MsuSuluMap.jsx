@@ -1,7 +1,10 @@
 import MapCustom from "../MapCustom";
-
-const gensanMap = {
-    tenantName: "SULU",
+const tenantName = "SULU";
+const imagePath = "/sites/MSUSulu/Shared Documents/MSUGensan Building Images/";
+const baseUrl = "https://msusulu1974.sharepoint.com/sites/MSUSulu/";
+const folderName = "MSUSulu Building Images";
+const suluMap = {
+    tenantName: tenantName,
     baseUrl:
         "https://msusulu1974.sharepoint.com/_api/web/lists/GetByTitle('MSUSuluBuildings')/items",
     queryParams: {
@@ -9,8 +12,6 @@ const gensanMap = {
         filter: "is_deleted eq 0",
     },
 };
-
-const gensanImagePath = "/Shared Documents/MSUSulu Building Images/";
 
 const MSU_COORDS = [6.047120060229939, 121.01551857257319];
 
@@ -35,12 +36,15 @@ const ZOOM = {
 const MsuSuluMap = () => {
     return (
         <MapCustom
-            mapUri={gensanMap}
+            mapUri={suluMap}
             center={MSU_COORDS}
-            naawanImagePath={gensanImagePath}
+            imagePath={imagePath}
             bounds={BOUNDS}
             colorScheme={COLORSCHEME}
             zoom={ZOOM}
+            tenantName={tenantName}
+            folderName={folderName}
+            baseUrl={baseUrl}
         />
     );
 };
