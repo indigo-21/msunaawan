@@ -1,6 +1,6 @@
 export const fetchMapLists = async (map) => {
 
-
+    console.log('testing map');
     const response = await fetch(import.meta.env.VITE_URL_FETCH + '/api/getData', {
         method: 'POST',
         headers: {
