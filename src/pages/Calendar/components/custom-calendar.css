@@ -1,0 +1,14 @@
+@media (max-width: 640px) {
+  .fc-toolbar.fc-header-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+
+  .fc-toolbar .fc-toolbar-chunk {
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 0.25rem;
+  }
+
+}

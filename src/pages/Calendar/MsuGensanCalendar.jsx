@@ -11,7 +11,7 @@ const COLORSCHEME = {
 
 function MsuGensanCalendar() {
     const [eventDataFormat, setEventDataFormat] = useState([]);
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    // const [isModalOpen, setIsModalOpen] = useState(false);
     const tenantName = "GENSAN";
     const gensanCalendar = {
         tenantName: tenantName,
@@ -20,8 +20,8 @@ function MsuGensanCalendar() {
         queryParams: {},
     };
 
-    const openModal = () => setIsModalOpen(true);
-    const closeModal = () => setIsModalOpen(false);
+    // const openModal = () => setIsModalOpen(true);
+    // const closeModal = () => setIsModalOpen(false);
 
     const { data: eventData, isLoading } = useQuery({
         queryKey: ["mapData"],
@@ -60,9 +60,6 @@ function MsuGensanCalendar() {
         <div>
             <Calendar
                 eventData={eventDataFormat}
-                isOpen={isModalOpen}
-                onClose={closeModal}
-                openModal={openModal}
                 colorScheme={COLORSCHEME}
             />
         </div>
