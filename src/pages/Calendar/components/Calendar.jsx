@@ -59,7 +59,7 @@ const Calendar = ({ eventData, colorScheme }) => {
             className="flex flex-row items-center justify-center"
             style={buttonStyles}
         >
-            <div className="p-4 bg-white rounded-lg shadow-md m-20 sm:px-6 lg:px-8">
+            <div className="w-full h-full">
                 {/* {isOpen && (
                     <Modal isOpen={isOpen} onClose={onClose}>
                         {modalContent}
