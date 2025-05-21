@@ -57,7 +57,7 @@ function MsuGensanCalendar() {
     }
 
     return (
-        <div>
+        <div className="bg-transparent w-screen h-screen flex flex-col items-center justify-center">
             <Calendar
                 eventData={eventDataFormat}
                 colorScheme={COLORSCHEME}
