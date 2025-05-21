@@ -15,7 +15,7 @@ const Calendar = ({ eventData, colorScheme }) => {
     };
 
     const handleEventClick = (arg) => {
-        window.location.href = arg.event.extendedProps.link;
+        window.top.location.href = arg.event.extendedProps.link;
         // console.log("Event clicked:", arg.event.extendedProps);
         // openModal();
 
