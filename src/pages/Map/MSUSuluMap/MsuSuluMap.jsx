@@ -1,4 +1,6 @@
 import MapCustom from "../MapCustom";
+
+const dateNow = new Date().toISOString();
 const tenantName = "SULU";
 const imagePath = "/sites/MSUSulu/Shared Documents/MSUGensan Building Images/";
 const baseUrl = "https://msusulu1974.sharepoint.com/sites/MSUSulu/";
@@ -8,8 +10,8 @@ const suluMap = {
     baseUrl:
         "https://msusulu1974.sharepoint.com/_api/web/lists/GetByTitle('MSUSuluBuildings')/items",
     queryParams: {
-        select: "Title,Latitude,Longitude,Description,Pictures,Status,Coordinates,ContactNumber,EmailAddress,is_deleted",
-        filter: "is_deleted eq 0",
+        select: "",
+        filter: `(is_deleted eq 0) and (expires_at ge datetime'${dateNow}' or expires_at eq null)`,
     },
 };
 

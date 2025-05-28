@@ -1,4 +1,6 @@
 import MapCustom from "../MapCustom";
+
+const dateNow = new Date().toISOString();
 const tenantName = "NAAWAN";
 const imagePath = "/Shared Documents/MSUNaawan Building Images/";
 const baseUrl = "https://msuatnaawan.sharepoint.com/";
@@ -8,11 +10,10 @@ const naawanMap = {
     baseUrl:
         "https://msuatnaawan.sharepoint.com/_api/web/lists/GetByTitle('MSUNaawanBuildings')/items",
     queryParams: {
-        select: "Title,Latitude,Longitude,Description,Pictures,Status,Coordinates,ContactNumber,EmailAddress,is_deleted",
-        filter: "is_deleted eq 0",
+        select: "",
+        filter: `(is_deleted eq 0) and (expires_at ge datetime'${dateNow}' or expires_at eq null)`,
     },
 };
-
 
 const MSU_COORDS = [8.428618869777717, 124.28762800990076];
 

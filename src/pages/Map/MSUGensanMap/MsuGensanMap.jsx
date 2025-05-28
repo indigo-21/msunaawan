@@ -1,7 +1,8 @@
 import MapCustom from "../MapCustom";
+
+const dateNow = new Date().toISOString();
 const tenantName = "GENSAN";
-const imagePath =
-    "/sites/msugensan/Shared Documents/MSUGensan Building Images/";
+const imagePath ="/sites/msugensan/Shared Documents/MSUGensan Building Images/";
 const baseUrl = "https://msugensan2.sharepoint.com/sites/msugensan/";
 const folderName = "MSUGensan Building Images";
 const gensanMap = {
@@ -9,8 +10,8 @@ const gensanMap = {
     baseUrl:
         "https://msugensan2.sharepoint.com/sites/msugensan/_api/web/lists/GetByTitle('MSUGensanBuildings')/items",
     queryParams: {
-        select: "Title,Latitude,Longitude,Description,Pictures,Status,Coordinates,ContactNumber,EmailAddress,is_deleted",
-        filter: "is_deleted eq 0",
+        select: "",
+        filter: `(is_deleted eq 0) and (expires_at ge datetime'${dateNow}' or expires_at eq null)`,
     },
 };
 
@@ -29,7 +30,7 @@ const COLORSCHEME = {
 };
 
 const ZOOM = {
-    defaultZoom: 17,
+    defaultZoom: 18,
     minZoom: 16,
     maxZoom: 18,
 };
