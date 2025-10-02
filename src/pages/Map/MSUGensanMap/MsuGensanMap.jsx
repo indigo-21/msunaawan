@@ -25,8 +25,8 @@ const BOUNDS = [
 ];
 
 const COLORSCHEME = {
-    color: "#fddd00",
-    fillColor: "#54090A",
+    color: "#ffab00",
+    fillColor: "#720455",
 };
 
 const ZOOM = {
